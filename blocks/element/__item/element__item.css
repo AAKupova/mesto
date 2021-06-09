@@ -1,0 +1,33 @@
+.element__item {
+  width: 282px;
+  height: 361px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* .element__item:last-child {
+  margin-bottom: 0;
+} */
+
+@media screen and (min-width: 768px) {
+  .element__item {
+    margin-bottom: 0;
+  }
+
+
+  /* .element__item:nth-child(3n) {
+    margin-right: 0;
+  } */
+}
+
+@media screen and (min-width: 1024px) {
+  /* .element__item   {
+    margin-right: 17px;
+  } */
+
+  /* .element__item:nth-child(3n) {
+    margin-right: 0;
+  } */
+
+}

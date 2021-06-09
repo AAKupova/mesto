@@ -1,0 +1,21 @@
+.element {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .element{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .element{
+    gap: 20px 17px;
+  }
+}
