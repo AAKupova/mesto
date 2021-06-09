@@ -9,7 +9,6 @@
     <script src="script/index.js"></script>
   </head>
   <body class="root">
-
     <header class="header">
       <img class="logo" src="./images/logo.svg" alt="Логотип" />
     </header>
@@ -28,8 +27,8 @@
           </h1>
           <p class="profil__text">Исследователь океана</p>
         </div>
-        <button class="profil__add-button button">
-          <img class="button__icon" src="./images/vector-plus.svg" />
+        <button class="profil__add-button">
+          <img class="profil__icon-button" src="./images/vector-plus.svg" />
         </button>
       </section>
 
@@ -96,12 +95,30 @@
           </li>
         </ul>
       </section>
-
-      <footer class="footer">
-        <p class="footer__text">
-          &copy; 2020 Mesto Russia
-        </p>
-      </footer>
     </main>
+
+    <footer class="footer">
+      <p class="footer__text">
+        &copy; 2020 Mesto Russia
+      </p>
+    </footer>
+
+    <div class="popup">
+      <div class="popup__body">
+        <div class="popup__container">
+          <div class="popup__close"></div>
+          <form class="form">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <input class="form__input" type="text" placeholder="Жак-Ив Кусто" />
+            <input
+              class="form__input"
+              type="text"
+              placeholder="Исследователь океана"
+            />
+            <button class="form__submit-button">Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
