@@ -6,7 +6,6 @@
 
     <title>Место</title>
     <link rel="stylesheet" href="pages/index.css" />
-    <script src="script/index.js"></script>
   </head>
   <body class="root">
     <header class="header">
@@ -21,10 +20,10 @@
           alt="Фото профеля"
         />
         <div class="profil__info">
-          <h1 class="profil__name">
+          <p class="profil__name">
             Жак-Ив Кусто
-            <img class="profil__edit-icon" src="./images/edit-button.svg" />
-          </h1>
+          </p>
+          <img class="profil__edit-icon" src="./images/edit-button.svg" />
           <p class="profil__text">Исследователь океана</p>
         </div>
         <button class="profil__add-button">
@@ -103,22 +102,25 @@
       </p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_close">
       <div class="popup__body">
         <div class="popup__container">
           <div class="popup__close"></div>
-          <form class="form">
+          <div class="form">
             <h2 class="form__title">Редактировать профиль</h2>
-            <input class="form__input" type="text" placeholder="Жак-Ив Кусто" />
+            <input class="form__input form__input_type_name" type="text" placeholder="Жак-Ив Кусто"  value="Жак-Ив Кусто"/>
             <input
-              class="form__input"
+              class="form__input form__input_type_description"
               type="text"
               placeholder="Исследователь океана"
+              value="Исследователь океана"
             />
             <button class="form__submit-button">Сохранить</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
+
+    <script src="script/index.js"></script>
   </body>
 </html>
