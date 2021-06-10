@@ -1,30 +1,41 @@
-let root = document.querySelector(".root"),
-  editButton = root.querySelector(".profil__edit-icon"),
-  closePopup = root.querySelector(".popup__close"),
-  submitButton = root.querySelector(".form__submit-button");
+const root = document.querySelector(".root");
+const editButton = root.querySelector(".profil__edit");
+const closeButton = root.querySelector(".popup__close");
+const formElement = root.querySelector(".form");
+const listElement = root.querySelector(".cards__list");
+const popup = root.querySelector(".popup");
+const submitButton = root.querySelector(".form__submit-button");
+const nameInput = root.querySelector(".form__input_type_name");
+const jobInput = root.querySelector(".form__input_type_description");
+const profilName = root.querySelector(".profil__name");
+const profilText = root.querySelector(".profil__text");
 
 function openPopup() {
-  let popup = root.querySelector(".popup");
+  popup.classList.remove("popup_hidden");
+}
 
-  if (popup.classList.contains("popup_close")) {
-    return popup.classList.remove("popup_close");
-  } else {
-    return popup.classList.add("popup_close");
+function closePopup({ target }) {
+  if (target === popup || target === closeButton || target === submitButton) {
+    popup.classList.add("popup_hidden");
   }
 }
 
-function editProfil() {
-  let name = root.querySelector(".form__input_type_name"),
-    description = root.querySelector(".form__input_type_description"),
-    profilName = root.querySelector(".profil__name"),
-    profilText = root.querySelector(".profil__text");
+function formSubmitHandler(event) {
+  event.preventDefault();
 
-  profilName.textContent = name.value;
-  profilText.textContent = description.value;
+  profilName.textContent = nameInput.value;
+  profilText.textContent = jobInput.value;
 
-  return openPopup();
+  closePopup(event);
+}
+
+function like({ target }) {
+  if (target.classList.contains("cards__icon")) {
+    target.classList.toggle("cards__icon_activ");
+  }
 }
 
 editButton.addEventListener("click", openPopup);
-closePopup.addEventListener("click", openPopup);
-submitButton.addEventListener("click", editProfil);
+popup.addEventListener("click", closePopup);
+formElement.addEventListener("submit", formSubmitHandler);
+listElement.addEventListener("click", like);

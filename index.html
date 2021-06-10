@@ -23,7 +23,11 @@
           <p class="profil__name">
             Жак-Ив Кусто
           </p>
-          <img class="profil__edit-icon" src="./images/edit-button.svg" />
+          <button
+            class="profil__edit"
+            type="button"
+            aria-label="Редактировать профиль"
+          ></button>
           <p class="profil__text">Исследователь океана</p>
         </div>
         <button class="profil__add-button">
@@ -31,65 +35,65 @@
         </button>
       </section>
 
-      <section class="elements">
-        <ul class="element">
-          <li class="element__item">
-            <img class="element__img" src="./images/Karachayevsk.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+      <section class="cards">
+        <ul class="cards__list">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/Karachayevsk.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Карачаево-Черкесия
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon"></button>
             </div>
           </li>
 
-          <li class="element__item">
-            <img class="element__img" src="./images/mount-elbrus.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/mount-elbrus.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Гора Эльбрус
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon"></button>
             </div>
           </li>
 
-          <li class="element__item">
-            <img class="element__img" src="./images/dombay.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/dombay.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Домбай
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon icon"></button>
             </div>
           </li>
 
-          <li class="element__item">
-            <img class="element__img" src="./images/mount-elbrus.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/mount-elbrus.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Гора Эльбрус
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon"></button>
             </div>
           </li>
 
-          <li class="element__item">
-            <img class="element__img" src="./images/dombay.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/dombay.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Домбай
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon"></button>
             </div>
           </li>
 
-          <li class="element__item">
-            <img class="element__img" src="./images/Karachayevsk.jpg" />
-            <div class="element__wrapper">
-              <h2 class="element__title">
+          <li class="cards__item">
+            <img class="cards__img" src="./images/Karachayevsk.jpg" />
+            <div class="cards__footer">
+              <p class="cards__title">
                 Карачаево-Черкесия
-              </h2>
-              <img class="element__icon" src="./images/vector-heart.svg" />
+              </p>
+              <button class="cards__icon"></button>
             </div>
           </li>
         </ul>
@@ -102,22 +106,29 @@
       </p>
     </footer>
 
-    <div class="popup popup_close">
-      <div class="popup__body">
-        <div class="popup__container">
-          <div class="popup__close"></div>
-          <div class="form">
-            <h2 class="form__title">Редактировать профиль</h2>
-            <input class="form__input form__input_type_name" type="text" placeholder="Жак-Ив Кусто"  value="Жак-Ив Кусто"/>
-            <input
-              class="form__input form__input_type_description"
-              type="text"
-              placeholder="Исследователь океана"
-              value="Исследователь океана"
-            />
-            <button class="form__submit-button">Сохранить</button>
-          </div>
-        </div>
+    <div class="popup popup_hidden">
+      <div class="popup__container">
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Закрыть"
+        ></button>
+        <form class="form">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <input
+            class="form__input form__input_type_name"
+            type="text"
+            placeholder="Имя"
+            value="Жак-Ив Кусто"
+          />
+          <input
+            class="form__input form__input_type_description"
+            type="text"
+            placeholder="Описание"
+            value="Исследователь океана"
+          />
+          <button type="submit" class="form__submit-button">Сохранить</button>
+        </form>
       </div>
     </div>
 

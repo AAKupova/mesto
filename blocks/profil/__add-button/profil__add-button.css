@@ -7,11 +7,11 @@
   background-color: #000;
   box-sizing: border-box;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .profil__add-button:hover {
   opacity: 0.6;
-  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

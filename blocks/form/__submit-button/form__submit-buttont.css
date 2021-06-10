@@ -9,13 +9,13 @@
   font-size: 14px;
   line-height: 1.2;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   border: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .form__submit-button:hover {
-  cursor: pointer;
   background: rgba(0, 0, 0, 0.8);
 }
 

@@ -1,17 +1,23 @@
 .footer {
   width: 282px;
-  margin: 48px auto 36px auto;
+  margin: 48px auto 36px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 622px) {
   .footer {
-    margin: 48px 0 36px 92px;
+    margin-left: calc((100vw - (282px * 2) - 20px) / 2);
+  }
+}
+
+@media screen and (min-width: 924px) {
+  .footer {
+    margin-left: calc((100vw - (282px * 3) - (20px * 2)) / 2);
   }
 }
 
 @media screen and (min-width: 1024px) {
   .footer {
     width: 880px;
-    margin: 67px auto 60px auto;
+    margin: 67px auto 60px;
   }
 }
