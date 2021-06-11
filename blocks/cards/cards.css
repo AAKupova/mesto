@@ -1,8 +1,11 @@
 .cards {
   padding: 0 19px;
+  display: grid;
+  grid-template-columns: min-content;
+  justify-content: center;
 }
 
-@media screen and (min-width: 924px) {
+@media screen and (min-width: 1280px) {
   .cards {
     max-width: 880px;
     margin: 0 auto;

@@ -9,8 +9,8 @@ const profilName = root.querySelector(".profil__name");
 const profilText = root.querySelector(".profil__text");
 
 function openPopup() {
-  nameInput.value = profilName.innerText;
-  jobInput.value = profilText.innerText;
+  nameInput.value = profilName.textContent.trim();
+  jobInput.value = profilText.textContent.trim();
 
   popup.classList.remove("popup_hidden");
 }
@@ -22,8 +22,8 @@ function closePopup() {
 function formSubmitHandler(event) {
   event.preventDefault();
 
-  profilName.innerText = nameInput.value;
-  profilText.innerText = jobInput.value;
+  profilName.textContent = nameInput.value.trim();
+  profilText.textContent = jobInput.value.trim();
 
   closePopup();
 }
