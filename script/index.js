@@ -8,11 +8,15 @@ const jobInput = root.querySelector(".form__input_type_description");
 const profilName = root.querySelector(".profil__name");
 const profilText = root.querySelector(".profil__text");
 
-function hiddenPopup() {
+function openPopup() {
   nameInput.value = profilName.innerText;
   jobInput.value = profilText.innerText;
 
-  popup.classList.toggle("popup_hidden");
+  popup.classList.remove("popup_hidden");
+}
+
+function closePopup() {
+  popup.classList.add("popup_hidden");
 }
 
 function formSubmitHandler(event) {
@@ -21,9 +25,9 @@ function formSubmitHandler(event) {
   profilName.innerText = nameInput.value;
   profilText.innerText = jobInput.value;
 
-  hiddenPopup();
+  closePopup();
 }
 
-editButton.addEventListener("click", hiddenPopup);
-closeButton.addEventListener("click", hiddenPopup);
+editButton.addEventListener("click", openPopup);
+closeButton.addEventListener("click", closePopup);
 formElement.addEventListener("submit", formSubmitHandler);
