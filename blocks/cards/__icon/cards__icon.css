@@ -1,7 +1,7 @@
 .cards__icon {
   width: 22px;
   height: 19px;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/vector-heart.svg);
   background-position: center;
   border: 0;
