@@ -1,0 +1,15 @@
+.profile__right {
+  text-align: center;
+}
+
+@media screen and (min-width: 625px) {
+  .profile__right {
+    align-self: center;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .profile__right {
+    margin-left: auto;
+  }
+}

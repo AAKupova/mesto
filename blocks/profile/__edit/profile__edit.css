@@ -1,0 +1,21 @@
+.profile__edit {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  padding: 0;
+  background-image: url(../../../images/edit-button-18.svg);
+  background-color: rgba(0, 0, 0, 0);
+  align-self: center;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 920px) {
+  .profile__edit {
+    width: 24px;
+    height: 24px;
+    background-image: url(../../../images/edit-button.svg);
+  }
+}

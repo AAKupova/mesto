@@ -1,19 +1,18 @@
 .header {
-  padding: 28px 0 32px 27px;
+  width: 100%;
+  padding: 28px 0 32px 8px;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 625px) {
   .header {
-    padding: 27px 0 32px 92px;
+    padding: 45px 0 41px 27px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .header {
-    max-width: 880px;
-    margin: 45px auto 0;
-    padding: 0 0 41px 0;
+    padding: 45px 0 41px 0;
   }
 }

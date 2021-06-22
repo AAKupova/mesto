@@ -1,13 +1,13 @@
 .logo {
   width: 104px;
   height: 25px;
+  background-image: url(../../images/logo.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.logo:hover {
-  opacity: 0.6;
-}
-
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .logo {
     width: 142px;
     height: 33px;

@@ -3,16 +3,18 @@
   margin: 0;
   padding: 0;
   display: grid;
+  justify-content: center;
   gap: 20px;
 }
 
-@media screen and (min-width: 622px) {
+@media screen and (min-width: 625px) {
   .cards__list {
     grid-template-columns: repeat(2, auto);
+    gap: 20px 20px;
   }
 }
 
-@media screen and (min-width: 924px) {
+@media screen and (min-width: 920px) {
   .cards__list {
     grid-template-columns: repeat(3, auto);
     gap: 20px 17px;
