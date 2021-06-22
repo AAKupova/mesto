@@ -1,0 +1,19 @@
+.preview__image {
+  width: 240px;
+  height: 299px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (min-width: 768px) {
+  .preview__image {
+    width: 433px;
+    height: 540px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .preview__image {
+    width: 816px;
+  }
+}
