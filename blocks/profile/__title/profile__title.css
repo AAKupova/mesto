@@ -8,6 +8,7 @@
   white-space: nowrap;
   overflow: hidden;
   width: 189px;
+  -webkit-font-smoothing: antialiased;
 }
 
 @media screen and (min-width: 920px) {

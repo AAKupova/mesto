@@ -34,66 +34,7 @@
         </section>
 
         <section class="cards">
-          <ul class="cards__list">
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img
-                class="card__image"
-                src="./images/Karachayevsk.jpg"
-                alt="Карачаевск"
-              />
-              <div class="card__footer">
-                <h2 class="card__title">Карачаевск Карачаевск</h2>
-                <button
-                  type="button"
-                  class="card__like card__like_active"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img class="card__image" alt="" />
-              <div class="card__footer">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img class="card__image" />
-              <div class="card__footer">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img class="card__image" />
-              <div class="card__footer">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
-              </div>
-            </li>
-
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img class="card__image" />
-              <div class="card__footer">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <button type="button" class="card__delete"></button>
-              <img class="card__image" />
-              <div class="card__footer">
-                <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
 
@@ -104,8 +45,8 @@
 
     <div class="popup popup_hidden popup_js_edit">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
-        <form class="form">
+        <button type="button" class="popup__close close_js_edit"></button>
+        <form class="form form_js_edit">
           <h2 class="form__title">Редактировать профиль</h2>
           <input
             class="
@@ -134,8 +75,8 @@
 
     <div class="popup popup_hidden popup_js_add">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
-        <form class="form">
+        <button type="button" class="popup__close close_js_add"></button>
+        <form class="form form_js_add">
           <h2 class="form__title">Новое место</h2>
           <input
             class="
@@ -155,20 +96,31 @@
             placeholder="Ссылка на картинку"
             required
           />
-          <button type="button" class="form__submit-btn">Создать</button>
+          <button type="submit" class="form__submit-btn">Создать</button>
         </form>
       </div>
     </div>
 
     <div class="popup popup_hidden popup_opacity_dark popup_js_preview">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__close close_js_preview"></button>
         <div class="preview">
-          <img class="preview__image" src="./images/Karachayevsk.jpg" />
+          <img class="preview__image" src="" />
         </div>
-        <p class="preview__caption">Карачаево-Черкессия</p>
+        <p class="preview__caption"></p>
       </div>
     </div>
+
+    <template id="card">
+      <li class="card">
+        <button type="button" class="card__delete"></button>
+        <img class="card__image" />
+        <div class="card__footer">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="script/index.js"></script>
   </body>

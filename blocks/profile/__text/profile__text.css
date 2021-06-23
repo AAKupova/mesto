@@ -3,10 +3,11 @@
   font-size: 14px;
   line-height: 1.2;
   color: #fff;
-  margin: 14px 0 0 0;
+  margin: 6px 0 0 0;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 @media screen and (min-width: 920px) {
