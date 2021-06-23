@@ -47,9 +47,9 @@ const jobInput = root.querySelector(".form__input_type_description");
 const titleInput = root.querySelector(".form__input_type_title");
 const linkInput = root.querySelector(".form__input_type_link");
 
-const closeEdit = root.querySelector(".close_js_edit");
-const closeAdd = root.querySelector(".close_js_add");
-const closePreview = root.querySelector(".close_js_preview"); 
+const closeEdit = root.querySelector(".popup__close_js_edit");
+const closeAdd = root.querySelector(".popup__close_js_add");
+const closePreview = root.querySelector(".popup__close_js_preview"); 
 
 function cardsForEach () {
   initialCards.forEach(item =>  addCards(item));
