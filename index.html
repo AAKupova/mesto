@@ -51,27 +51,41 @@
         ></button>
         <form class="form form_js_edit">
           <h2 class="form__title">Редактировать профиль</h2>
-          <input
-            class="
-              form__input form__input_type_name form__input_placeholder_black
-            "
-            type="text"
-            name="name"
-            placeholder="Имя"
-            required
-          />
-          <input
-            class="
-              form__input
-              form__input_type_description
-              form__input_placeholder_black
-            "
-            type="text"
-            name="job"
-            placeholder="Описание"
-            required
-          />
-          <button type="submit" class="form__submit-btn">Сохранить</button>
+
+          <label class="form__field">
+            <input
+              class="
+                form__input form__input_type_name form__input_placeholder_black
+              "
+              type="text"
+              name="name"
+              placeholder="Имя"
+              required
+            />
+            <span class="form__input-error">Вы пропустили это поле.</span>
+          </label>
+
+          <label class="form__field">
+            <input
+              class="
+                form__input
+                form__input_type_description
+                form__input_placeholder_black
+              "
+              type="text"
+              name="job"
+              placeholder="Описание"
+              required
+            />
+            <span class="form__input-error">Вы пропустили это поле.</span>
+          </label>
+
+          <button
+            type="submit"
+            class="form__submit-btn form__submit-btn_inactive"
+          >
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -81,25 +95,37 @@
         <button type="button" class="popup__close popup__close_js_add"></button>
         <form class="form form_js_add">
           <h2 class="form__title">Новое место</h2>
-          <input
-            class="
-              form__input form__input_type_title form__input_placeholder_gray
-            "
-            type="text"
-            name="title"
-            placeholder="Название"
-            required
-          />
-          <input
-            class="
-              form__input form__input_type_link form__input_placeholder_gray
-            "
-            type="text"
-            name="link"
-            placeholder="Ссылка на картинку"
-            required
-          />
-          <button type="submit" class="form__submit-btn">Создать</button>
+          <label class="form__field">
+            <input
+              class="
+                form__input form__input_type_title form__input_placeholder_gray
+              "
+              type="text"
+              name="title"
+              placeholder="Название"
+              required
+            />
+            <span class="form__input-error">Вы пропустили это поле.</span>
+          </label>
+          <label class="form__field">
+            <input
+              class="
+                form__input form__input_type_link form__input_placeholder_gray
+              "
+              type="text"
+              name="link"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="form__input-error">Введите адрес сайта.</span>
+          </label>
+
+          <button
+            type="submit"
+            class="form__submit-btn form__submit-btn_inactive"
+          >
+            Создать
+          </button>
         </form>
       </div>
     </div>
