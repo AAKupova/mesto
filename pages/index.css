@@ -42,9 +42,10 @@
 @import url(../blocks/form/__submit-btn/form__submit-btn.css);
 @import url(../blocks/form/__submit-btn/_inactive/form__submit-btn_inactive.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(../blocks/form/__input/_placeholder/form__input_placeholder_black.css);
 @import url(../blocks/form/__input/_placeholder/form__input_placeholder_gray.css);
-@import url(../blocks/form/__input-error/form__input-error.css);
 
 @import url(../blocks/preview/__image/preview__image.css);
 @import url(../blocks/preview/__caption/preview__caption.css); ;

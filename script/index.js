@@ -1,28 +1,49 @@
-const root = document.querySelector(".root");
+/**
+ * @typedef TFormData
+ * @type {object}
+ * @property {string} formSelector селектор формы
+ * @property {string} inputSelector селектор елемента инпут блока формы
+ * @property {string} submitButtonSelector селектор елемента кнопка блока формы
+ * @property {string} inactiveButtonClass селектор елемента кнопка блока формы в состоянии неактивна
+ * @property {string} inputErrorClass селектор елемента инпут блока формы с модификатором тип со значение ошибка
+ * @property {string} errorClass селектор елемента ошибка блока формы в состоянии активна
+ */
 
-const editButton = root.querySelector(".profile__edit");
-const addButton = root.querySelector(".profile__add-btn");
+/** @type {TFormData} */
+const formData = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_inactive',
+  inputErrorClass: '.form__input_type_error',
+  errorClass: 'form__input-error_active',
+};
 
-const popupEdit = root.querySelector(".popup_js_edit");
-const popupAdd = root.querySelector(".popup_js_add");
-const popupPreview = root.querySelector(".popup_js_preview");
+const root = document.querySelector('.root');
 
-const profilName = root.querySelector(".profile__title");
-const profilText = root.querySelector(".profile__text");
-const containerCards = root.querySelector(".cards__list");
-const card = root.querySelector(".card");
+const editButton = root.querySelector('.profile__edit');
+const addButton = root.querySelector('.profile__add-btn');
 
-const formEdit = root.querySelector(".form_js_edit");
-const formAdd = root.querySelector(".form_js_add");
+const popupEdit = root.querySelector('.popup_js_edit');
+const popupAdd = root.querySelector('.popup_js_add');
+const popupPreview = root.querySelector('.popup_js_preview');
 
-const nameInput = root.querySelector(".form__input_type_name");
-const jobInput = root.querySelector(".form__input_type_description");
-const titleInput = root.querySelector(".form__input_type_title");
-const linkInput = root.querySelector(".form__input_type_link");
+const profilName = root.querySelector('.profile__title');
+const profilText = root.querySelector('.profile__text');
+const containerCards = root.querySelector('.cards__list');
+const card = root.querySelector('.card');
 
-const closeEdit = root.querySelector(".popup__close_js_edit");
-const closeAdd = root.querySelector(".popup__close_js_add");
-const closePreview = root.querySelector(".popup__close_js_preview");
+const formEdit = root.querySelector('.form_js_edit');
+const formAdd = root.querySelector('.form_js_add');
+
+const nameInput = root.querySelector('.form__input_type_name');
+const jobInput = root.querySelector('.form__input_type_description');
+const titleInput = root.querySelector('.form__input_type_title');
+const linkInput = root.querySelector('.form__input_type_link');
+
+const closeEdit = root.querySelector('.popup__close_js_edit');
+const closeAdd = root.querySelector('.popup__close_js_add');
+const closePreview = root.querySelector('.popup__close_js_preview');
 
 function renderCards(arrCards) {
   arrCards.forEach((item) => addCards(createCard(item)));
@@ -31,10 +52,10 @@ function renderCards(arrCards) {
 renderCards(initialCards);
 
 function createCard(item) {
-  const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const imageElement = cardElement.querySelector(".card__image");
-  const titleElement = cardElement.querySelector(".card__title");
+  const cardTemplate = document.querySelector('#card').content;
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const imageElement = cardElement.querySelector('.card__image');
+  const titleElement = cardElement.querySelector('.card__title');
 
   imageElement.src = item.link;
   imageElement.alt = item.name;
@@ -47,20 +68,20 @@ function addCards(card) {
   containerCards.prepend(card);
 }
 
-const deleteButton = document.querySelector(".card__delete");
+const deleteButton = document.querySelector('.card__delete');
 
 function clickLike(event) {
-  if (event.target.classList.contains("card__like")) {
-    event.target.classList.toggle("card__like_active");
+  if (event.target.classList.contains('card__like')) {
+    event.target.classList.toggle('card__like_active');
   }
 }
 
 function openPopup(popup) {
-  popup.classList.remove("popup_hidden");
+  popup.classList.remove('popup_hidden');
 }
 
 function closePopup(popup) {
-  popup.classList.add("popup_hidden");
+  popup.classList.add('popup_hidden');
 }
 
 function openPropfilePopup() {
@@ -68,18 +89,26 @@ function openPropfilePopup() {
   jobInput.value = profilText.textContent.trim();
 
   openPopup(popupEdit);
+  enableValidation({
+    ...formData,
+    formSelector: '.form_js_edit',
+  });
 }
 
 function openAddCardPopup() {
   openPopup(popupAdd);
+  enableValidation({
+    ...formData,
+    formSelector: '.form_js_add',
+  });
 }
 
 function openPopupPreview(event) {
   const e = event.target;
 
-  if (e.classList.contains("card__image")) {
-    const previewImg = root.querySelector(".preview__image");
-    const previewText = root.querySelector(".preview__caption");
+  if (e.classList.contains('card__image')) {
+    const previewImg = root.querySelector('.preview__image');
+    const previewText = root.querySelector('.preview__caption');
 
     previewImg.src = e.src;
     previewText.textContent = e.alt;
@@ -94,10 +123,12 @@ function closePopupPreview() {
 
 function closePopupAdd() {
   closePopup(popupAdd);
+  formAdd.reset();
 }
 
 function closePopupEdit() {
   closePopup(popupEdit);
+  formEdit.reset();
 }
 
 function formSubmitHandlerProfil(event) {
@@ -119,26 +150,24 @@ function formSubmitHandlerAddCard(event) {
 
   addCards(createCard(itemCard));
   closePopupAdd();
-
-  formAdd.reset();
 }
 
 function deleteCard(event) {
-  if (event.target.classList.contains("card__delete")) {
-    event.target.closest(".card").remove();
+  if (event.target.classList.contains('card__delete')) {
+    event.target.closest('.card').remove();
   }
 }
 
-editButton.addEventListener("click", openPropfilePopup);
-containerCards.addEventListener("click", openPopupPreview);
-addButton.addEventListener("click", openAddCardPopup);
+editButton.addEventListener('click', openPropfilePopup);
+containerCards.addEventListener('click', openPopupPreview);
+addButton.addEventListener('click', openAddCardPopup);
 
-closeEdit.addEventListener("click", closePopupEdit);
-closePreview.addEventListener("click", closePopupPreview);
-closeAdd.addEventListener("click", closePopupAdd);
+closeEdit.addEventListener('click', closePopupEdit);
+closePreview.addEventListener('click', closePopupPreview);
+closeAdd.addEventListener('click', closePopupAdd);
 
-formEdit.addEventListener("submit", formSubmitHandlerProfil);
-formAdd.addEventListener("submit", formSubmitHandlerAddCard);
+formEdit.addEventListener('submit', formSubmitHandlerProfil);
+formAdd.addEventListener('submit', formSubmitHandlerAddCard);
 
-containerCards.addEventListener("click", clickLike);
-containerCards.addEventListener("click", deleteCard);
+containerCards.addEventListener('click', clickLike);
+containerCards.addEventListener('click', deleteCard);
