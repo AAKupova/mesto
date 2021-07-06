@@ -8,28 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation-duration: 0.3s;
-  animation-name: fadeInDown;
-}
-
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-  }
-
-  25% {
-    opacity: 0.25;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  75% {
-    opacity: 0.75;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  transition: opacity 0.3s;
+  opacity: 1;
+  pointer-events: all;
 }
