@@ -1,4 +1,6 @@
 .popup__container {
   margin: 0 auto;
   position: relative;
+  transform: scale(1);
+  transition: transform 0.3s;
 }
