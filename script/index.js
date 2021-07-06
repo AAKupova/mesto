@@ -1,3 +1,12 @@
+const formData = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit-btn",
+  inactiveButtonClass: "form__submit-btn_inactive",
+  inputErrorClass: "`.${input.id}-error`",
+  errorClass: "form__input-error_active",
+};
+
 const root = document.querySelector(".root");
 
 const editButton = root.querySelector(".profile__edit");
@@ -57,6 +66,7 @@ function clickLike(event) {
 
 function openPopup(popup) {
   popup.classList.remove("popup_hidden");
+  enableValidation(formData);
 }
 
 function closePopup(popup) {

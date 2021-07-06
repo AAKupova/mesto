@@ -1,4 +1,6 @@
 .profile__text {
+  display: inline-block;
+  min-width: 70px;
   font-weight: normal;
   font-size: 14px;
   line-height: 1.2;

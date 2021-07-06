@@ -49,11 +49,14 @@
           type="button"
           class="popup__close popup__close_js_edit"
         ></button>
-        <form class="form form_js_edit">
+        <form name="editProfile" class="form form_js_edit" novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
 
           <label class="form__field">
             <input
+              minlength="2"
+              maxlength="40"
+              id="name-input"
               class="
                 form__input form__input_type_name form__input_placeholder_black
               "
@@ -62,11 +65,14 @@
               placeholder="Имя"
               required
             />
-            <span class="form__input-error">Вы пропустили это поле.</span>
+            <span class="form__input-error name-input-error"></span>
           </label>
 
           <label class="form__field">
             <input
+              minlength="2"
+              maxlength="200"
+              id="job-input"
               class="
                 form__input
                 form__input_type_description
@@ -77,13 +83,10 @@
               placeholder="Описание"
               required
             />
-            <span class="form__input-error">Вы пропустили это поле.</span>
+            <span class="form__input-error job-input-error"></span>
           </label>
 
-          <button
-            type="submit"
-            class="form__submit-btn form__submit-btn_inactive"
-          >
+          <button disabled type="submit" class="form__submit-btn default-asset">
             Сохранить
           </button>
         </form>
@@ -93,10 +96,13 @@
     <div class="popup popup_hidden popup_js_add">
       <div class="popup__container">
         <button type="button" class="popup__close popup__close_js_add"></button>
-        <form class="form form_js_add">
+        <form name="addCard" class="form form_js_add" novalidate>
           <h2 class="form__title">Новое место</h2>
           <label class="form__field">
             <input
+              minlength="2"
+              maxlength="30"
+              id="title-input"
               class="
                 form__input form__input_type_title form__input_placeholder_gray
               "
@@ -105,25 +111,24 @@
               placeholder="Название"
               required
             />
-            <span class="form__input-error">Вы пропустили это поле.</span>
+            <span class="form__input-error title-input-error"></span>
           </label>
           <label class="form__field">
             <input
+              pattern="https://.*"
+              id="link-input"
               class="
                 form__input form__input_type_link form__input_placeholder_gray
               "
-              type="text"
+              type="url"
               name="link"
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="form__input-error">Введите адрес сайта.</span>
+            <span class="form__input-error link-input-error"></span>
           </label>
 
-          <button
-            type="submit"
-            class="form__submit-btn form__submit-btn_inactive"
-          >
+          <button disabled type="submit" class="form__submit-btn">
             Создать
           </button>
         </form>
@@ -156,6 +161,7 @@
       </li>
     </template>
     <script src="script/initial-cards.js"></script>
+    <script src="script/validate.js"></script>
     <script src="script/index.js"></script>
   </body>
 </html>
