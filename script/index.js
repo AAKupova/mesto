@@ -29,6 +29,7 @@ const handlerOpenPopupPreview = ({ target }) => {
   const previewText = document.querySelector('.preview__caption');
 
   previewImg.src = target.src;
+  previewImg.alt = target.alt;
   previewText.textContent = target.alt;
 };
 
