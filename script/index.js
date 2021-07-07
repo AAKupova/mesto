@@ -25,18 +25,17 @@ const formData = {
  * @param {Event} e
  */
 const handlerOpenPopupPreview = ({ target }) => {
-  if (target.classList.contains('card__image')) {
-    const previewImg = document.querySelector('.preview__image');
-    const previewText = document.querySelector('.preview__caption');
+  const previewImg = document.querySelector('.preview__image');
+  const previewText = document.querySelector('.preview__caption');
 
-    previewImg.src = target.src;
-    previewText.textContent = target.alt;
-  }
+  previewImg.src = target.src;
+  previewText.textContent = target.alt;
 };
 
 createPopup({
   popup: '.popup_js_preview',
   open: '.cards__list',
+  openByElem: 'card__image',
   close: '.popup__close_js_preview',
   onOpen: handlerOpenPopupPreview,
 });

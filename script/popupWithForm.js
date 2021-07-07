@@ -4,6 +4,7 @@
  * @property {String} popup селектор попапа
  * @property {String} form селектор формы
  * @property {String} open ссылка на кнопку открытия попапа
+ * @property {String} openByElem css класс который должен присутствовать на элементе для открытия попапа
  * @property {String} close ссылка на кнопку закрытия попапа
  * @property {Function} onOpen колбек на открытие попапа
  * @property {Function} onClose колбек на закрытие попапа
