@@ -1,0 +1,24 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Ссылка на страницу ->  https://aakupova.github.io/mesto/index.html ___",
+  "main": "index.js",
+  "scripts": {
+    "pre-commit": "pretty-quick --staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AAKupova/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AAKupova/mesto/issues"
+  },
+  "homepage": "https://github.com/AAKupova/mesto#readme",
+  "devDependencies": {
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1"
+  }
+}
