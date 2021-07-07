@@ -14,34 +14,52 @@ const isFieldValid = (form, field, formData) => {
 /**
  * Проверяет наличие полей не прошедших валидацию
  *
- * @param {Array.<HTMLElement>} fields массив dom елементов полей формы
+ * @param {Array.<HTMLElement>} fields массив dom элементов полей формы
  * @returns {Boolean} true - если есть не прошедшие валидацию поля формы
  */
 const hasInvalidField = (fields) =>
   fields.some((field) => !field.validity.valid);
 
 /**
- * Функция переключения состояния disabled кнопки
+ * Функция блокировки кнопки
  *
- * @param {Array.<HTMLElement>} fields массив dom елементов полей формы
- * @param {HTMLElement} button dom елемент кнопки
+ * @param {HTMLElement} button dom элемент кнопки
  * @param {TFormData} formData параметры валидации формы
  */
-const toggleButtonState = (fields, button, formData) => {
-  if (hasInvalidField(fields)) {
-    button.classList.add(formData.inactiveButtonClass);
-    button.setAttribute('disabled', 'disabled');
-  } else {
-    button.classList.remove(formData.inactiveButtonClass);
-    button.removeAttribute('disabled');
-  }
+const lockButton = (button, formData) => {
+  button.classList.add(formData.inactiveButtonClass);
+  button.setAttribute('disabled', 'disabled');
+};
+
+/**
+ * Функция разблокировки кнопки
+ *
+ * @param {HTMLElement} button dom элемент кнопки
+ * @param {TFormData} formData параметры валидации формы
+ */
+const unlockButton = (button, formData) => {
+  button.classList.remove(formData.inactiveButtonClass);
+  button.removeAttribute('disabled');
+};
+
+/**
+ * Функция переключения состояния disabled кнопки
+ *
+ * @param {Array.<HTMLElement>} fields массив dom элементов полей формы
+ * @param {HTMLElement} button dom элемент кнопки
+ * @param {TFormData} formData параметры валидации формы
+ */
+const toggleButtonDisable = (fields, button, formData) => {
+  hasInvalidField(fields)
+    ? lockButton(button, formData)
+    : unlockButton(button, formData);
 };
 
 /**
  * Функция показа ошибки валидации поля формы
  *
- * @param {HTMLElement} form dom елемент формы
- * @param {HTMLElement} field dom елемент поля формы
+ * @param {HTMLElement} form dom элемент формы
+ * @param {HTMLElement} field dom элемент поля формы
  * @param {TFormData} formData параметры валидации формы
  */
 const showError = (form, field, formData) => {
@@ -55,8 +73,8 @@ const showError = (form, field, formData) => {
 /**
  * Функция скрытия ошибки валидации поля формы
  *
- * @param {HTMLElement} form dom елемент формы
- * @param {HTMLElement} field dom елемент поля формы
+ * @param {HTMLElement} form dom элемент формы
+ * @param {HTMLElement} field dom элемент поля формы
  * @param {TFormData} formData параметры валидации формы
  */
 const hideError = (form, field, formData) => {
@@ -68,53 +86,52 @@ const hideError = (form, field, formData) => {
 };
 
 /**
- * Функция первичной валидации
- * и подписки на события изменения данных в полях формы
+ * Функция подписки на события изменения данных в полях формы
  *
- * @param {HTMLElement} form dom елемент формы
- * @param {Array.<HTMLElement>} fields массив dom елементов полей формы
- * @param {HTMLElement} button dom елемент кнопки
+ * @param {HTMLElement} form dom элемент формы
+ * @param {Array.<HTMLElement>} fields массив dom элементов полей формы
+ * @param {HTMLElement} button dom элемент кнопки
  * @param {TFormData} formData параметры валидации формы
- * @returns {Array.<Function>} массив обработчиков событий изменения полей формы на которые подписались
  */
 const enableFieldsValidation = (form, fields, button, formData) => {
-  let handlers = [];
+  fields.forEach((field) => {
+    field.addEventListener('input', () => {
+      isFieldValid(form, field, formData);
+      toggleButtonDisable(fields, button, formData);
+    });
+  });
+};
 
-  toggleButtonState(fields, button, formData);
+/**
+ * Функция установки валидации в начальное состояние
+ *
+ * @param {HTMLElement} form dom элемент формы
+ * @param {Array.<HTMLElement>} fields массив dom элементов полей формы
+ * @param {HTMLElement} button dom элемент кнопки
+ * @param {TFormData} formData параметры валидации формы
+ */
+const resetValidation = (form, fields, button, formData) => {
+  toggleButtonDisable(fields, button, formData);
 
   fields.forEach((field) => {
-    const onInput = () => {
-      isFieldValid(form, field, formData);
-      toggleButtonState(fields, button, formData);
-    };
-
     hideError(form, field, formData);
-
-    field.addEventListener('input', onInput);
-
-    handlers.push(onInput);
   });
-
-  return handlers;
 };
 
 /**
  * Функция первичной инициализации валидации
  *
  * @param {TFormData} formData параметры валидации формы
+ * @returns {{ reset: Function }} объект с методом сброса валидации
  */
 const enableValidation = (formData) => {
   const form = document.querySelector(formData.formSelector);
   const fields = [...form.querySelectorAll(formData.inputSelector)];
   const button = form.querySelector(formData.submitButtonSelector);
-  const handlers = enableFieldsValidation(form, fields, button, formData);
-  const onReset = () => {
-    fields.forEach((field, index) => {
-      field.removeEventListener('input', handlers[index]);
-    });
 
-    form.removeEventListener('reset', onReset);
+  enableFieldsValidation(form, fields, button, formData);
+
+  return {
+    reset: resetValidation.bind(null, form, fields, button, formData),
   };
-
-  form.addEventListener('reset', onReset);
 };
