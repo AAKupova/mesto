@@ -50,12 +50,10 @@ const linkInput = document.querySelector('.form__input_type_link');
  * Обработчик отправки формы добавления карточки
  */
 const handlerSubmitFormAddCard = () => {
-  addCards(
-    createCard({
-      name: titleInput.value,
-      link: linkInput.value,
-    })
-  );
+  renderCard({
+    name: titleInput.value,
+    link: linkInput.value,
+  });
 };
 
 createPopupWithFrom({

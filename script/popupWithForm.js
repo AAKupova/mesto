@@ -20,10 +20,14 @@ const createPopupWithFrom = (config) => {
   /** @type {HTMLElement} dom элемент формы */
   const form = document.querySelector(config.form);
   /** @type {{ reset: Function }} объект с методом сброса валидации */
-  const validation = enableValidation({
-    ...config.configValidation,
-    formSelector: config.form,
-  });
+  const validation = () => {
+    const formValidator = new FormValidator({
+      ...config.configValidation,
+      formSelector: config.form,
+    });
+
+    return formValidator;
+  };
 
   /**
    * Обработчик открытия попапа
@@ -35,7 +39,7 @@ const createPopupWithFrom = (config) => {
       config.onOpen(e);
     }
 
-    validation.reset();
+    validation().enableValidation;
   };
 
   /**
