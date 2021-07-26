@@ -15,7 +15,7 @@
  * @param {TPopupConfig} config
  * @returns {{ hide: Function }} объект с методом закрытия попапа
  */
-const createPopup = (config) => {
+export const createPopup = (config) => {
   /** @type {HTMLElement} dom элемент попапа */
   const popup = document.querySelector(config.popup);
   /** @type {HTMLElement} dom элемент кнопки открытия попапа */

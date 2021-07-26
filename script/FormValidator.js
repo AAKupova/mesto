@@ -1,5 +1,5 @@
 /** @class FormValidator - создание экземпляра для валидации формы */
-class FormValidator {
+export class FormValidator {
   /** @constructor */
   /**
    * Параметры:

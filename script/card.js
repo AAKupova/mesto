@@ -1,3 +1,5 @@
+import { initialCards } from './initial-cards.js';
+
 /**
  * @typedef TClassNames
  * @type {object}
@@ -140,7 +142,7 @@ const insertCard = (card) => {
  *
  * @param {object} item - параметры карточки.
  */
-const renderCard = (item) => {
+export const renderCard = (item) => {
   const card = new Card(item, cardTemplate);
   insertCard(card.newCard);
 };
