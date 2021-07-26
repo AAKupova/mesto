@@ -1,3 +1,6 @@
+import { FormValidator } from './FormValidator.js';
+import { createPopup } from './popup.js';
+
 /**
  * @typedef TPopupWithFormConfig
  * @type {Object}
@@ -16,7 +19,7 @@
  *
  * @param {TPopupWithFormConfig} config
  */
-const createPopupWithFrom = (config) => {
+export const createPopupWithFrom = (config) => {
   /** @type {HTMLElement} dom элемент формы */
   const form = document.querySelector(config.form);
 
