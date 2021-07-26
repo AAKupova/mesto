@@ -19,7 +19,8 @@
 const createPopupWithFrom = (config) => {
   /** @type {HTMLElement} dom элемент формы */
   const form = document.querySelector(config.form);
-  /** @type {{ reset: Function }} объект с методом сброса валидации */
+
+  /** @type {{ reset: Function }} создания экземпляра класса с методом сброса валидации */
   const validation = () => {
     const formValidator = new FormValidator({
       ...config.configValidation,
