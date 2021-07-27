@@ -123,7 +123,7 @@ class Card {
    *
    * @return {HTMLElement} - возвращает готовую карточку.
    */
-  get newCard() {
+  newCard() {
     return this.#createCard();
   }
 }
@@ -144,7 +144,7 @@ const insertCard = (card) => {
  */
 export const renderCard = (item) => {
   const card = new Card(item, cardTemplate);
-  insertCard(card.newCard);
+  insertCard(card.newCard());
 };
 
 /**
