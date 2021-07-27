@@ -1,5 +1,8 @@
 /** @class FormValidator - создание экземпляра для валидации формы */
 export class FormValidator {
+  #form;
+  #fields;
+  #button;
   /** @constructor */
   /**
    * Параметры:
@@ -106,11 +109,15 @@ export class FormValidator {
    * @param {Array.<HTMLElement>} fields - массив dom элементов полей формы.
    * @param {HTMLElement} button - dom элемент кнопки.
    */
-  #resetValidation(form, fields, button) {
-    this.#toggleButtonDisable(fields, button);
+  resetValidation(form, fields, button) {
+    const fieldsReset = fields || this.#fields;
+    const buttonReset = button || this.#button;
+    const formReset = form || this.#form;
 
-    fields.forEach((field) => {
-      this.#hideError(form, field);
+    this.#toggleButtonDisable(fieldsReset, buttonReset);
+
+    fieldsReset.forEach((field) => {
+      this.#hideError(formReset, field);
     });
   }
 
@@ -119,14 +126,16 @@ export class FormValidator {
    *
    * @returns {{ reset: Function }} - объект с методом сброса валидации
    */
-  get enableValidation() {
+  enableValidation() {
     const { formSelector, inputSelector, submitButtonSelector } = this.formData;
     const form = document.querySelector(formSelector);
     const fields = [...form.querySelectorAll(inputSelector)];
     const button = form.querySelector(submitButtonSelector);
 
-    this.#enableFieldsValidation(form, fields, button);
+    this.#form = form;
+    this.#fields = fields;
+    this.#button = button;
 
-    return this.#resetValidation(form, fields, button);
+    this.#enableFieldsValidation(form, fields, button);
   }
 }

@@ -1,6 +1,6 @@
 import { createPopupWithFrom } from './popupWithForm.js';
 import { createPopup } from './popup.js';
-import { renderCard } from './Ca.js';
+import { renderCard } from './Card.js';
 
 /**
  * @typedef TFormData
