@@ -45,6 +45,8 @@ class Card {
     card: `.${this.#classNames.card}`,
     image: `.${this.#classNames.image}`,
     title: `.${this.#classNames.title}`,
+    like: `.${this.#classNames.like}`,
+    delete: `.${this.#classNames.delete}`,
   };
 
   /** @constructor */
@@ -76,12 +78,14 @@ class Card {
     const card = this.#cloneTemplate();
     const image = card.querySelector(this.#selectors.image);
     const title = card.querySelector(this.#selectors.title);
+    const like = card.querySelector(this.#selectors.like);
+    const remove = card.querySelector(this.#selectors.delete);
 
     image.src = link;
     image.alt = name;
     title.textContent = name;
 
-    this.#addEventsListener(card);
+    this.#addEventsListener(like, remove);
 
     return card;
   }
@@ -89,11 +93,12 @@ class Card {
   /**
    * Метод добавляет прослушиватели событий для карточки.
    *
-   * @param {HTMLElement} card - элемент карточки.
+   * @param {HTMLElement} like - элемент карточки - иконка лайка.
+   * @param {HTMLElement} remove - элемент карточки - иконка удаления.
    */
-  #addEventsListener(card) {
-    card.addEventListener('click', this.#handlerClickLike.bind(this));
-    card.addEventListener('click', this.#handlerDeleteCard.bind(this));
+  #addEventsListener(like, remove) {
+    like.addEventListener('click', this.#handlerClickLike.bind(this));
+    remove.addEventListener('click', this.#handlerDeleteCard.bind(this));
   }
 
   /**
@@ -102,9 +107,7 @@ class Card {
    * @param {Event} e - элемент события.
    */
   #handlerClickLike(e) {
-    if (e.target.classList.contains(this.#classNames.like)) {
-      e.target.classList.toggle(this.#classNames.likeActive);
-    }
+    e.target.classList.toggle(this.#classNames.likeActive);
   }
 
   /**
@@ -113,9 +116,7 @@ class Card {
    * @param {Event} e - элемент события.
    */
   #handlerDeleteCard(e) {
-    if (e.target.classList.contains(this.#classNames.delete)) {
-      e.target.closest(this.#selectors.card).remove();
-    }
+    e.target.closest(this.#selectors.card).remove();
   }
 
   /**
