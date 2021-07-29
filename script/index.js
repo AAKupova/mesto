@@ -23,15 +23,18 @@ const formData = {
   errorClass: 'form__input-error_active',
 };
 
+/** @type {HTMLElement} previewImg - картинка попапа превью. */
+const previewImg = document.querySelector('.preview__image');
+
+/** @type {HTMLElement} previewText - текст попапа превью. */
+const previewText = document.querySelector('.preview__caption');
+
 /**
  * Обработчик открытия попапа просмотра картинок
  *
  * @param {Event} e
  */
 const handlerOpenPopupPreview = ({ target }) => {
-  const previewImg = document.querySelector('.preview__image');
-  const previewText = document.querySelector('.preview__caption');
-
   previewImg.src = target.src;
   previewImg.alt = target.alt;
   previewText.textContent = target.alt;
@@ -74,24 +77,24 @@ const nameInput = document.querySelector('.form__input_type_name');
 /** @type {HTMLElement} dom элемент инпута - описания, формы редактирования профиля */
 const jobInput = document.querySelector('.form__input_type_description');
 /** @type {HTMLElement} dom элемент имеи профиля */
-const profilName = document.querySelector('.profile__title');
+const profileName = document.querySelector('.profile__title');
 /** @type {HTMLElement} dom элемент описания профиля */
-const profilText = document.querySelector('.profile__text');
+const profileText = document.querySelector('.profile__text');
 
 /**
  * Обработчик открытия попапа редактирования профиля
  */
 const handlerOpenPopupAddEdit = () => {
-  nameInput.value = profilName.textContent.trim();
-  jobInput.value = profilText.textContent.trim();
+  nameInput.value = profileName.textContent.trim();
+  jobInput.value = profileText.textContent.trim();
 };
 
 /**
  * Обработчик отправки формы редактирования профиля
  */
 const handlerSubmitFormAddEdit = () => {
-  profilName.textContent = nameInput.value.trim();
-  profilText.textContent = jobInput.value.trim();
+  profileName.textContent = nameInput.value.trim();
+  profileText.textContent = jobInput.value.trim();
 };
 
 createPopupWithFrom({
