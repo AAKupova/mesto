@@ -24,6 +24,17 @@ export const createPopup = (config) => {
   const closeButton = popup.querySelector(config.close);
 
   /**
+   * Обработчик закрытия попапа по escape
+   *
+   * @param {Event} e
+   */
+  const handlerClosePopupByEsc = (e) => {
+    if (e.key === 'Escape') {
+      hide();
+    }
+  };
+
+  /**
    * Обработчик открытия попапа
    *
    * @param {Event} e
@@ -68,17 +79,6 @@ export const createPopup = (config) => {
     }
   };
 
-  /**
-   * Обработчик закрытия попапа по escape
-   *
-   * @param {Event} e
-   */
-  const handlerClosePopupByEsc = (e) => {
-    if (e.key == 'Escape') {
-      hide();
-    }
-  };
-
   openButton.addEventListener('click', handlerOpen);
   popup.addEventListener('click', handlerHide);
 
@@ -86,3 +86,68 @@ export const createPopup = (config) => {
     hide,
   };
 };
+
+class Popup {
+  #popup;
+
+  constructor(popupSelector) {
+    this.#popup = document.querySelector(popupSelector);
+  }
+
+  open() {
+    this.#popup.classList.remove('popup_hidden');
+
+    this.#addEventListeners();
+  }
+
+  close() {
+    this.#popup.classList.add('popup_hidden');
+
+    this.#removeEventListeners();
+  }
+
+  #handlerClosePopupByEsc(e) {
+    if (e.key === 'Escape') {
+      this.close();
+    }
+  }
+
+  #addEventListeners() {
+    document.addEventListener(
+      'keydown',
+      this.#handlerClosePopupByEsc.bind(this)
+    );
+  }
+
+  #removeEventListeners() {
+    document.removeEventListener(
+      'keydown',
+      this.#handlerClosePopupByEsc.bind(this)
+    );
+  }
+
+  setEventListeners() {
+    const closeButton = this.#popup.querySelector('.popup__close');
+    closeButton.addEventListener('click', this.close.bind(this));
+  }
+}
+
+const openPopupAdd = () => {
+  const classPopupu = new Popup('.popup_js_add');
+  classPopupu.open();
+  classPopupu.setEventListeners();
+};
+
+const buttonPopupAdd = document.querySelector('.profile__add-btn');
+
+buttonPopupAdd.addEventListener('click', openPopupAdd);
+
+const openPopupEdit = () => {
+  const classPopupu = new Popup('.popup_js_edit');
+  classPopupu.open();
+  classPopupu.setEventListeners();
+};
+
+const buttonPopupEdit = document.querySelector('.profile__edit');
+
+buttonPopupEdit.addEventListener('click', openPopupEdit);
