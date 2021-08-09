@@ -2,10 +2,13 @@
 export class FormValidator {
   /** @type {HTMLElement}  #form - dom форма. */
   #form;
+
   /** @type {HTMLElement}  #fields - поля формы. */
   #fields;
+
   /** @type {HTMLElement}  #button - кнопка формы. */
   #button;
+
   /** @type {object}  formData - данные формы */
   formData;
 
@@ -22,7 +25,11 @@ export class FormValidator {
    * @param {HTMLElement} field - поле которое валидируем.
    */
   #isFieldValid(field) {
-    !field.validity.valid ? this.#showError(field) : this.#hideError(field);
+    if (!field.validity.valid) {
+      this.#showError(field);
+    } else {
+      this.#hideError(field);
+    }
   }
 
   /** Метод блокировки кнопки. */
@@ -39,9 +46,13 @@ export class FormValidator {
 
   /** Метод переключения состояния disabled кнопки. */
   #toggleButtonDisable() {
-    this.#fields.some((field) => !field.validity.valid)
-      ? this.#lockButton()
-      : this.#unlockButton();
+    this.#fields.some((field) => {
+      if (!field.validity.valid) {
+        return this.#lockButton();
+      }
+
+      return this.#unlockButton();
+    });
   }
 
   /**

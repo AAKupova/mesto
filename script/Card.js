@@ -4,7 +4,7 @@ import { initialCards } from './initial-cards.js';
  * @typedef TClassNames
  * @type {object}
  * @property {string} card класс карточки
- * @property {string} image класс картинки карточки
+ * @property {string} image класс кxартинки карточки
  * @property {string} title класс заголовка карточки
  * @property {string} like класс иконки лайка карточки
  * @property {string} likeActive класс иконки лайка в активном состоянии карточки
@@ -28,6 +28,7 @@ const cardTemplate = document.querySelector('#card').content;
 /** @class Card - создание экземпляра карты */
 class Card {
   #template;
+
   #data;
 
   /** @type {TClassNames} */
@@ -59,6 +60,7 @@ class Card {
     this.#template = template;
     this.#data = data;
   }
+
   /**
    * Метод клонирует шаблон карточки.
    *
@@ -132,7 +134,7 @@ class Card {
 /**
  * Функция добавлении карточки в дом дерево.
  *
- * @param {HTMLElement} card -  карточкаю
+ * @param {HTMLElement} card - карточкаю
  */
 const insertCard = (card) => {
   containerCards.prepend(card);
