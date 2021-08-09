@@ -1,4 +1,6 @@
 import { initialCards } from './initial-cards.js';
+import PopupWithImage from './PopupWithImage.js';
+import Popup from './Popup.js';
 
 /**
  * @typedef TClassNames
@@ -56,9 +58,10 @@ class Card {
    * @param {object} data - данные для создание новой карточки.
    * @param {HTMLElement} template - шаблон карточки.
    */
-  constructor(data, template) {
+  constructor(data, template, { handleCardClick }) {
     this.#template = template;
     this.#data = data;
+    this.handleCardClick = handleCardClick;
   }
 
   /**
@@ -88,6 +91,7 @@ class Card {
     title.textContent = name;
 
     this.#addEventsListener(like, remove);
+    this.#openPopup(card);
 
     return card;
   }
@@ -101,6 +105,12 @@ class Card {
   #addEventsListener(like, remove) {
     like.addEventListener('click', this.#handlerClickLike.bind(this));
     remove.addEventListener('click', this.#handlerDeleteCard.bind(this));
+  }
+
+  #openPopup(card) {
+    card.addEventListener('click', (e) => {
+      this.handleCardClick(e);
+    });
   }
 
   /**
@@ -146,10 +156,14 @@ const insertCard = (card) => {
  * @param {object} item - параметры карточки.
  */
 export const renderCard = (item) => {
-  const card = new Card(item, cardTemplate);
+  const card = new Card(item, cardTemplate, {
+    handleCardClick: (e) => {
+      const openPopupPreview = new PopupWithImage('.popup_js_preview');
+      openPopupPreview.open(e);
+    },
+  });
   insertCard(card.newCard());
 };
-
 /**
  * Функция перебора обекта с данными.
  *

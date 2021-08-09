@@ -1,5 +1,5 @@
 /** @class FormValidator - создание экземпляра для валидации формы */
-export class FormValidator {
+export default class FormValidator {
   /** @type {HTMLElement}  #form - dom форма. */
   #form;
 
