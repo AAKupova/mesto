@@ -1,5 +1,6 @@
 import { renderCard } from './Card.js';
 import Popup from './popup.js';
+import UserInfo from './UserInfo.js';
 
 // /**
 //  * @typedef TPopupWithFormConfig
@@ -145,10 +146,6 @@ const handlerSubmitFormAddCard = (data) => {
 };
 
 const popupWithFormAdd = new PopupWithForm('.form_js_add', '.popup_js_add', {
-  // popup: '.popup_js_add',
-  // open: '.profile__add-btn',
-  // close: '.popup__close_js_add',
-  // form: '.form_js_add',
   configValidation: formData,
   onSubmit: handlerSubmitFormAddCard,
 });
@@ -158,22 +155,19 @@ popupWithFormAdd.setEventListeners();
 // /** @type {HTMLElement} dom элемент инпута - имени, формы редактирования профиля */
 // const nameInput = document.querySelector('.form__input_type_name');
 // /** @type {HTMLElement} dom элемент инпута - описания, формы редактирования профиля */
-// const jobInput = document.querySelector('.form__input_type_description');
+// const jobInput = document.querySelector('.form__input_type_description');]
+
 /** @type {HTMLElement} dom элемент имеи профиля */
 const profileName = document.querySelector('.profile__title');
 /** @type {HTMLElement} dom элемент описания профиля */
 const profileText = document.querySelector('.profile__text');
 
 const handlerSubmitFormAddEdit = (valueEdit) => {
-  profileName.textContent = valueEdit.name.trim();
-  profileText.textContent = valueEdit.job.trim();
+  const userInfo = new UserInfo(profileName, profileText);
+  userInfo.setUserInfo(valueEdit);
 };
 
 const popupWithFormEdit = new PopupWithForm('.form_js_edit', '.popup_js_edit', {
-  // popup: '.popup_js_edit',
-  // open: '.profile__edit',
-  // close: '.popup__close_js_edit',
-  // form: '.form_js_edit',
   configValidation: formData,
   // onOpen: handlerOpenPopupAddEdit,
   onSubmit: handlerSubmitFormAddEdit,
