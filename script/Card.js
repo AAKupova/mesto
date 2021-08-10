@@ -1,6 +1,6 @@
 import { initialCards } from './initial-cards.js';
 import PopupWithImage from './PopupWithImage.js';
-// import Popup from './popup.js';
+import Section from './Section.js';
 
 /**
  * @typedef TClassNames
@@ -146,20 +146,20 @@ class Card {
   }
 }
 
-/**
- * Функция добавлении карточки в дом дерево.
- *
- * @param {HTMLElement} card - карточкаю
- */
-const insertCard = (card) => {
-  containerCards.prepend(card);
-};
+// /**
+//  * Функция добавлении карточки в дом дерево.
+//  *
+//  * @param {HTMLElement} card - карточкаю
+//  */
+// const insertCard = (card) => {
+//   containerCards.prepend(card);
+// };
 
-/**
- * Функция создания экземпляра класса карточки.
- *
- * @param {object} item - параметры карточки.
- */
+// /**
+//  * Функция создания экземпляра класса карточки.
+//  *
+//  * @param {object} item - параметры карточки.
+//  */
 export const renderCard = (item) => {
   const card = new Card(item, cardTemplate, {
     handleCardClick: (e) => {
@@ -167,15 +167,30 @@ export const renderCard = (item) => {
       openPopupPreview.open(e);
     },
   });
-  insertCard(card.newCard());
+  return card.newCard();
 };
-/**
- * Функция перебора обекта с данными.
- *
- * @param {object} arrCards - обекта с данными для карточек.
- */
-const renderCards = (arrCards) => {
-  arrCards.forEach(renderCard);
+// /**
+//  * Функция перебора обекта с данными.
+//  *
+//  * @param {object} arrCards - обекта с данными для карточек.
+//  */
+// const renderCards = (arrCards) => {
+//   arrCards.forEach(renderCard);
+// };
+
+export const renderDom = (item) => {
+  section.addItem(renderCard(item));
 };
 
-renderCards(initialCards);
+const section = new Section(
+  {
+    initialCards,
+    renderer: (item) => {
+      renderDom(item);
+    },
+  },
+  containerCards
+);
+section.rendererGeneral();
+
+// renderCards(initialCards);

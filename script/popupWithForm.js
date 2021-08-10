@@ -1,4 +1,4 @@
-import { renderCard } from './Card.js';
+import { renderDom } from './Card.js';
 import Popup from './popup.js';
 import UserInfo from './UserInfo.js';
 
@@ -142,7 +142,7 @@ const formData = {
  * Обработчик отправки формы добавления карточки
  */
 const handlerSubmitFormAddCard = (data) => {
-  renderCard(data);
+  renderDom(data);
 };
 
 const popupWithFormAdd = new PopupWithForm('.form_js_add', '.popup_js_add', {
