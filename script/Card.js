@@ -1,6 +1,6 @@
 import { initialCards } from './initial-cards.js';
 import PopupWithImage from './PopupWithImage.js';
-import Popup from './Popup.js';
+// import Popup from './popup.js';
 
 /**
  * @typedef TClassNames
@@ -32,6 +32,8 @@ class Card {
   #template;
 
   #data;
+
+  #image;
 
   /** @type {TClassNames} */
   #classNames = {
@@ -81,13 +83,14 @@ class Card {
   #createCard() {
     const { link, name } = this.#data;
     const card = this.#cloneTemplate();
-    const image = card.querySelector(this.#selectors.image);
     const title = card.querySelector(this.#selectors.title);
     const like = card.querySelector(this.#selectors.like);
     const remove = card.querySelector(this.#selectors.delete);
 
-    image.src = link;
-    image.alt = name;
+    this.#image = card.querySelector(this.#selectors.image);
+
+    this.#image.src = link;
+    this.#image.alt = name;
     title.textContent = name;
 
     this.#addEventsListener(like, remove);
@@ -109,7 +112,9 @@ class Card {
 
   #openPopup(card) {
     card.addEventListener('click', (e) => {
-      this.handleCardClick(e);
+      if (e.target === this.#image) {
+        this.handleCardClick(e);
+      }
     });
   }
 
