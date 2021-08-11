@@ -136,21 +136,3 @@ export default class Popup {
     );
   }
 }
-
-const openPopupAdd = () => {
-  const classPopupu = new Popup('.popup_js_add');
-  classPopupu.open();
-};
-
-const buttonPopupAdd = document.querySelector('.profile__add-btn');
-
-buttonPopupAdd.addEventListener('click', openPopupAdd);
-
-const openPopupEdit = () => {
-  const classPopupu = new Popup('.popup_js_edit');
-  classPopupu.open();
-};
-
-const buttonPopupEdit = document.querySelector('.profile__edit');
-
-buttonPopupEdit.addEventListener('click', openPopupEdit);

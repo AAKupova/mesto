@@ -1,6 +1,6 @@
-import { initialCards } from './initial-cards.js';
-import PopupWithImage from './PopupWithImage.js';
-import Section from './Section.js';
+// import { initialCards } from './initial-cards.js';
+// import PopupWithImage from './PopupWithImage.js';
+// import Section from './Section.js';
 
 /**
  * @typedef TClassNames
@@ -21,14 +21,8 @@ import Section from './Section.js';
  * @property {string} title title заголовка карточки
  */
 
-/** @type {HTMLElement} контайнер карточек */
-const containerCards = document.querySelector('.cards__list');
-
-/** @type {HTMLElement} template - шаблон карточки */
-const cardTemplate = document.querySelector('#card').content;
-
 /** @class Card - создание экземпляра карты */
-class Card {
+export default class Card {
   #template;
 
   #data;
@@ -145,52 +139,3 @@ class Card {
     return this.#createCard();
   }
 }
-
-// /**
-//  * Функция добавлении карточки в дом дерево.
-//  *
-//  * @param {HTMLElement} card - карточкаю
-//  */
-// const insertCard = (card) => {
-//   containerCards.prepend(card);
-// };
-
-// /**
-//  * Функция создания экземпляра класса карточки.
-//  *
-//  * @param {object} item - параметры карточки.
-//  */
-export const renderCard = (item) => {
-  const card = new Card(item, cardTemplate, {
-    handleCardClick: (e) => {
-      const openPopupPreview = new PopupWithImage('.popup_js_preview');
-      openPopupPreview.open(e);
-    },
-  });
-  return card.newCard();
-};
-// /**
-//  * Функция перебора обекта с данными.
-//  *
-//  * @param {object} arrCards - обекта с данными для карточек.
-//  */
-// const renderCards = (arrCards) => {
-//   arrCards.forEach(renderCard);
-// };
-
-export const renderDom = (item) => {
-  section.addItem(renderCard(item));
-};
-
-const section = new Section(
-  {
-    initialCards,
-    renderer: (item) => {
-      renderDom(item);
-    },
-  },
-  containerCards
-);
-section.rendererGeneral();
-
-// renderCards(initialCards);

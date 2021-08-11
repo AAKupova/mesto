@@ -1,6 +1,6 @@
-import { renderDom } from './Card.js';
-import Popup from './popup.js';
-import UserInfo from './UserInfo.js';
+// import { renderDom } from './Card.js';
+import Popup from './Popup.js';
+// import UserInfo from './UserInfo.js';
 
 // /**
 //  * @typedef TPopupWithFormConfig
@@ -81,7 +81,7 @@ import UserInfo from './UserInfo.js';
 // };
 
 export default class PopupWithForm extends Popup {
-  #form;
+  form;
 
   #onSubmit;
 
@@ -91,23 +91,23 @@ export default class PopupWithForm extends Popup {
 
   constructor(formSelector, popupSelector, { onSubmit }) {
     super(popupSelector);
-    this.#form = document.querySelector(formSelector);
+    this.form = document.querySelector(formSelector);
     this.#onSubmit = onSubmit;
   }
 
-  #close() {
+  close() {
     super.close();
-    this.#form.reset();
+    this.form.reset();
   }
 
   #handlerSubmit(e) {
     e.preventDefault();
     this.#onSubmit(this.#getInputValues());
-    this.#close();
+    this.close();
   }
 
   #getInputValues() {
-    this.#inputList = this.#form.querySelectorAll('.form__input');
+    this.#inputList = this.form.querySelectorAll('.form__input');
     this.#formValues = {};
 
     this.#inputList.forEach((input) => {
@@ -118,20 +118,11 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    this.#form.addEventListener('submit', (e) => {
+    this.form.addEventListener('submit', (e) => {
       this.#handlerSubmit(e);
     });
   }
 }
-
-const formData = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_inactive',
-  inputErrorClass: '.form__input_type_error',
-  errorClass: 'form__input-error_active',
-};
 
 // /** @type {HTMLElement} dom элемент инпута тайтла формы дабавления карточки */
 // const titleInput = document.querySelector('.form__input_type_title');
@@ -141,36 +132,43 @@ const formData = {
 /**
  * Обработчик отправки формы добавления карточки
  */
-const handlerSubmitFormAddCard = (data) => {
-  renderDom(data);
-};
+// const handlerSubmitFormAddCard = (data) => {
+//   renderDom(data);
+// };
 
-const popupWithFormAdd = new PopupWithForm('.form_js_add', '.popup_js_add', {
-  configValidation: formData,
-  onSubmit: handlerSubmitFormAddCard,
-});
+// const popupWithFormAdd = new PopupWithForm('.form_js_add', '.popup_js_add', {
+//   configValidation: formData,
+//   onSubmit: handlerSubmitFormAddCard,
+// });
 
-popupWithFormAdd.setEventListeners();
+// popupWithFormAdd.setEventListeners();
 
 // /** @type {HTMLElement} dom элемент инпута - имени, формы редактирования профиля */
 // const nameInput = document.querySelector('.form__input_type_name');
 // /** @type {HTMLElement} dom элемент инпута - описания, формы редактирования профиля */
 // const jobInput = document.querySelector('.form__input_type_description');]
 
-/** @type {HTMLElement} dom элемент имеи профиля */
-const profileName = document.querySelector('.profile__title');
-/** @type {HTMLElement} dom элемент описания профиля */
-const profileText = document.querySelector('.profile__text');
+// /** @type {HTMLElement} dom элемент имеи профиля */
+// const profileName = document.querySelector('.profile__title');
+// /** @type {HTMLElement} dom элемент описания профиля */
+// const profileText = document.querySelector('.profile__text');
 
-const handlerSubmitFormAddEdit = (valueEdit) => {
-  const userInfo = new UserInfo(profileName, profileText);
-  userInfo.setUserInfo(valueEdit);
-};
+// const handlerSubmitFormAddEdit = (valueEdit) => {
+//   const userInfo = new UserInfo(profileName, profileText);
+//   userInfo.setUserInfo(valueEdit);
+// };
 
-const popupWithFormEdit = new PopupWithForm('.form_js_edit', '.popup_js_edit', {
-  configValidation: formData,
-  // onOpen: handlerOpenPopupAddEdit,
-  onSubmit: handlerSubmitFormAddEdit,
-});
+// const popupWithFormEdit = new PopupWithForm('.form_js_edit', '.popup_js_edit', {
+//   configValidation: formData,
+//   // onOpen: handlerOpenPopupAddEdit,
+//   onSubmit: handlerSubmitFormAddEdit,
+// });
 
-popupWithFormEdit.setEventListeners();
+// popupWithFormEdit.setEventListeners();
+
+//   const validation = new FormValidator({
+//     ...config.configValidation,
+//     formSelector: config.form,
+//   });
+//   validation.enableValidation();
+// validation.resetValidation();
