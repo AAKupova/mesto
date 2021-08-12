@@ -4,10 +4,6 @@ import { popupСlose } from '../utils/constants';
 export default class Popup {
   #popup;
 
-  #form;
-
-  #conteiner;
-
   /** @constructor */
   /**
    * Параметр:

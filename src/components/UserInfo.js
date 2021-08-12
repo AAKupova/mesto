@@ -16,6 +16,7 @@ export default class UserInfo {
   constructor(name, job) {
     this.#name = name;
     this.#job = job;
+    this.#valueEdit = {};
   }
 
   /**
@@ -29,7 +30,9 @@ export default class UserInfo {
 
   /** Метод вставляет данные на страницу. */
   setUserInfo(valueEdit) {
-    this.#valueEdit = valueEdit;
+    this.#valueEdit.name = valueEdit.name;
+    this.#valueEdit.job = valueEdit.job;
+
     this.#name.textContent = this.#valueEdit.name.trim();
     this.#job.textContent = this.#valueEdit.job.trim();
   }

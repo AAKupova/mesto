@@ -1,10 +1,10 @@
-import { initialCards } from './data';
-import PopupWithImage from './components/PopupWithImage';
-import PopupWithForm from './components/PopupWithForm';
-import FormValidator from './components/FormValidator';
-import UserInfo from './components/UserInfo';
-import Section from './components/Section';
-import Card from './components/Card';
+import { initialCards } from '../utils/data';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWithForm from '../components/PopupWithForm';
+import FormValidator from '../components/FormValidator';
+import UserInfo from '../components/UserInfo';
+import Section from '../components/Section';
+import Card from '../components/Card';
 import {
   buttonPopupEdit,
   buttonPopupAdd,
@@ -16,14 +16,22 @@ import {
   nameInput,
   jobInput,
   popupPreview,
+  previewCaption,
+  previewImage,
   formAdd,
   popupAdd,
   formEdit,
   popupEdit,
-} from './utils/constants';
+} from '../utils/constants';
 
-import './pages/index.css';
-import Popup from './components/Popup';
+import './index.css';
+
+/** Объявляем класс userInfo. */
+const openPopupPreview = new PopupWithImage(
+  popupPreview,
+  previewImage,
+  previewCaption
+);
 
 /**
  * Функция создает экземпляр класса Card.
@@ -34,7 +42,6 @@ import Popup from './components/Popup';
 const renderCard = (item) => {
   const card = new Card(item, cardTemplate, {
     handleCardClick: (e) => {
-      const openPopupPreview = new PopupWithImage(popupPreview);
       openPopupPreview.open(e);
     },
   });
@@ -65,11 +72,6 @@ section.render();
 /** Объявляем класс userInfo. */
 const userInfo = new UserInfo(profileName, profileText);
 
-/** Функция сабмита формы редактирование профиля. */
-const handlerSubmitFormAddEdit = (valueEdit) => {
-  userInfo.setUserInfo(valueEdit);
-};
-
 /** Объявляем класс FormValidator для формы добавления карточки. */
 const validationAdd = new FormValidator({
   ...formData,
@@ -87,19 +89,21 @@ const addPopupForm = new PopupWithForm(formAdd, popupAdd, {
   onSubmit: renderer,
 });
 
-addPopupForm.setEventListeners();
+addPopupForm.submitEventListeners();
 validationAdd.enableValidation();
+
+/** Функция сабмита формы редактирование профиля. */
+const handlerSubmitFormAddEdit = (valueEdit) => {
+  userInfo.setUserInfo(valueEdit);
+};
 
 /** Объявляем класс PopupWithForm для создания и обработки формы добавления карточки. */
 const editPopupForm = new PopupWithForm(formEdit, popupEdit, {
   onSubmit: handlerSubmitFormAddEdit,
 });
 
-editPopupForm.setEventListeners();
+editPopupForm.submitEventListeners();
 validationEdit.enableValidation();
-
-/** Объявляем класс editPopup для создания попапа редактирование профиля. */
-const editPopup = new Popup(popupEdit);
 
 /** Функция открывает попап редактирование профиля и вставляет данные в форму. */
 const openPopupEdit = () => {
@@ -108,16 +112,12 @@ const openPopupEdit = () => {
   jobInput.value = profileText.textContent.trim() || valueEdit.job;
 
   validationEdit.resetValidation();
-  editPopup.open();
+  editPopupForm.open();
 };
-
-/** Объявляем класс addPopup для создания попапа добавления карточки. */
-const addPopup = new Popup(popupAdd);
 
 /** Функция открывает попап добавления карточки. */
 const openPopupAdd = () => {
-  addPopup.open();
-  validationAdd.resetForm();
+  addPopupForm.open();
   validationAdd.resetValidation();
 };
 

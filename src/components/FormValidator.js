@@ -91,10 +91,6 @@ export default class FormValidator {
     });
   }
 
-  resetForm() {
-    this.#form.reset();
-  }
-
   /** Метод установки валидации в начальное состояние. */
   resetValidation() {
     this.#toggleButtonDisable();
