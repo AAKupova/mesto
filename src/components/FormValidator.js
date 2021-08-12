@@ -46,13 +46,13 @@ export default class FormValidator {
 
   /** Метод переключения состояния disabled кнопки. */
   #toggleButtonDisable() {
-    this.#fields.some((field) => {
-      if (!field.validity.valid) {
-        return this.#lockButton();
-      }
+    const isNotValid = this.#fields.some((field) => !field.validity.valid);
 
-      return this.#unlockButton();
-    });
+    if (isNotValid) {
+      this.#lockButton();
+    } else {
+      this.#unlockButton();
+    }
   }
 
   /**
@@ -91,14 +91,10 @@ export default class FormValidator {
     });
   }
 
-  resetForm() {
-    this.#form.reset();
-  }
-
   /** Метод установки валидации в начальное состояние. */
   resetValidation() {
     this.#toggleButtonDisable();
-
+    this.#form.reset();
     this.#fields.forEach((field) => {
       this.#hideError(field);
     });

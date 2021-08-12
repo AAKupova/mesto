@@ -11,7 +11,7 @@ export default class Section {
     this.#container = containerSelector;
   }
 
-  rendererGeneral() {
+  render() {
     this.#items.forEach((item) => this.#renderer(item));
   }
 

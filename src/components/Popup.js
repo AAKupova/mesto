@@ -90,6 +90,10 @@
 export default class Popup {
   #popup;
 
+  #form;
+
+  #conteiner;
+
   constructor(popupSelector) {
     this.#popup = document.querySelector(popupSelector);
   }
@@ -102,37 +106,31 @@ export default class Popup {
 
   close() {
     this.#popup.classList.add('popup_hidden');
-
     this.#removeEventListeners();
   }
 
-  #handlerHide(e) {
+  handlerHide = (e) => {
     const { target } = e;
     const closeButton = this.#popup.querySelector('.popup__close');
 
     if (target === this.#popup || target === closeButton) {
       this.close();
     }
-  }
+  };
 
-  #handlerClosePopupByEsc(e) {
+  #handleEscClose = (e) => {
     if (e.key === 'Escape') {
       this.close();
     }
-  }
+  };
 
   #removeEventListeners() {
-    document.removeEventListener(
-      'keydown',
-      this.#handlerClosePopupByEsc.bind(this)
-    );
+    document.removeEventListener('keydown', this.#handleEscClose);
+    this.#popup.removeEventListener('click', this.handlerHide);
   }
 
   setEventListeners() {
-    this.#popup.addEventListener('click', this.#handlerHide.bind(this));
-    document.addEventListener(
-      'keydown',
-      this.#handlerClosePopupByEsc.bind(this)
-    );
+    this.#popup.addEventListener('click', this.handlerHide);
+    document.addEventListener('keydown', this.#handleEscClose);
   }
 }

@@ -1,5 +1,5 @@
 // import { renderDom } from './Card.js';
-import Popup from './Popup.js';
+import Popup from './Popup';
 // import UserInfo from './UserInfo.js';
 
 // /**
@@ -118,6 +118,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    super.setEventListeners();
     this.form.addEventListener('submit', (e) => {
       this.#handlerSubmit(e);
     });
