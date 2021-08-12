@@ -1,85 +1,8 @@
-// import { renderDom } from './Card.js';
 import Popup from './Popup';
-// import UserInfo from './UserInfo.js';
+import { formInput } from '../utils/constants';
 
-// /**
-//  * @typedef TPopupWithFormConfig
-//  * @type {Object}
-//  * @property {String} popup селектор попапа
-//  * @property {String} form селектор формы
-//  * @property {String} open ссылка на кнопку открытия попапа
-//  * @property {String} openByElem css класс который должен присутствовать на элементе для открытия попапа
-//  * @property {String} close ссылка на кнопку закрытия попапа
-//  * @property {Function} onOpen колбек на открытие попапа
-//  * @property {Function} onClose колбек на закрытие попапа
-//  * @property {Function} onSubmit колбек на отправку формы
-//  */
-
-// /**
-//  * Функция создания попапа с формой
-//  *
-//  * @param {TPopupWithFormConfig} config
-//  */
-// export const createPopupWithFrom = (config) => {
-//   /** @type {HTMLElement} dom элемент формы */
-//   const form = document.querySelector(config.form);
-
-//   const validation = new FormValidator({
-//     ...config.configValidation,
-//     formSelector: config.form,
-//   });
-//   validation.enableValidation();
-//   /**
-//    * Обработчик открытия попапа
-//    *
-//    * @param {Event} e
-//    */
-//   const handlerOpen = (e) => {
-//     if (config.onOpen) {
-//       config.onOpen(e);
-//     }
-
-//     validation.resetValidation();
-//   };
-
-//   /**
-//    * Обработчик закрытия попапа
-//    *
-//    * @param {Event} e
-//    */
-//   const handlerClose = (e) => {
-//     form.reset();
-
-//     if (config.onClose) {
-//       config.onClose(e);
-//     }
-//   };
-
-//   /** @type {{ hide: Function }} объект с методом закрытия попапа */
-//   const popup = createPopup({
-//     ...config,
-//     onClose: handlerClose,
-//     onOpen: handlerOpen,
-//   });
-
-//   /**
-//    * Обработчик отправки формы
-//    *
-//    * @param {Event} e
-//    */
-//   const handlerSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (config.onSubmit) {
-//       config.onSubmit(e);
-//     }
-
-//     popup.hide(e);
-//   };
-
-//   form.addEventListener('submit', handlerSubmit);
-// };
-
+/** @class PopupWithForm - создание экземпляра попапа с формой. */
+/** @extends Popup */
 export default class PopupWithForm extends Popup {
   form;
 
@@ -89,25 +12,41 @@ export default class PopupWithForm extends Popup {
 
   #formValues;
 
+  /** @constructor */
+  /**
+   * Параметры:
+   * @callback onSubmit
+   * @param {string} popupSelector - селектор попапа.
+   * @param {string} formSelector - селектор формы.
+   * @param {onSubmit} -  вызывает функцию отправки данных по submit.
+   */
   constructor(formSelector, popupSelector, { onSubmit }) {
     super(popupSelector);
     this.form = document.querySelector(formSelector);
     this.#onSubmit = onSubmit;
   }
 
+  /** Метод наследует от родителя (метод close) и расширяет его,
+   *  сбрасывает форму.
+   * */
   close() {
     super.close();
     this.form.reset();
   }
 
+  /** Метод отправки формы. */
   #handlerSubmit(e) {
     e.preventDefault();
     this.#onSubmit(this.#getInputValues());
     this.close();
   }
 
+  /** Метод собирающий данные всех полей формы.
+   *  formInput - селектор  полей формы.
+   * @return {Object} - возрощает объект со значениями полей формы.
+   */
   #getInputValues() {
-    this.#inputList = this.form.querySelectorAll('.form__input');
+    this.#inputList = this.form.querySelectorAll(formInput);
     this.#formValues = {};
 
     this.#inputList.forEach((input) => {
@@ -117,6 +56,9 @@ export default class PopupWithForm extends Popup {
     return this.#formValues;
   }
 
+  /** Метод наследует родительский (метод setEventListeners) и расширяет его,
+   * подпиской на событие submit.
+   * */
   setEventListeners() {
     super.setEventListeners();
     this.form.addEventListener('submit', (e) => {
@@ -124,52 +66,3 @@ export default class PopupWithForm extends Popup {
     });
   }
 }
-
-// /** @type {HTMLElement} dom элемент инпута тайтла формы дабавления карточки */
-// const titleInput = document.querySelector('.form__input_type_title');
-// /** @type {HTMLElement} dom элемент инпута ссылки формы дабавления карточки */
-// const linkInput = document.querySelector('.form__input_type_link');
-
-/**
- * Обработчик отправки формы добавления карточки
- */
-// const handlerSubmitFormAddCard = (data) => {
-//   renderDom(data);
-// };
-
-// const popupWithFormAdd = new PopupWithForm('.form_js_add', '.popup_js_add', {
-//   configValidation: formData,
-//   onSubmit: handlerSubmitFormAddCard,
-// });
-
-// popupWithFormAdd.setEventListeners();
-
-// /** @type {HTMLElement} dom элемент инпута - имени, формы редактирования профиля */
-// const nameInput = document.querySelector('.form__input_type_name');
-// /** @type {HTMLElement} dom элемент инпута - описания, формы редактирования профиля */
-// const jobInput = document.querySelector('.form__input_type_description');]
-
-// /** @type {HTMLElement} dom элемент имеи профиля */
-// const profileName = document.querySelector('.profile__title');
-// /** @type {HTMLElement} dom элемент описания профиля */
-// const profileText = document.querySelector('.profile__text');
-
-// const handlerSubmitFormAddEdit = (valueEdit) => {
-//   const userInfo = new UserInfo(profileName, profileText);
-//   userInfo.setUserInfo(valueEdit);
-// };
-
-// const popupWithFormEdit = new PopupWithForm('.form_js_edit', '.popup_js_edit', {
-//   configValidation: formData,
-//   // onOpen: handlerOpenPopupAddEdit,
-//   onSubmit: handlerSubmitFormAddEdit,
-// });
-
-// popupWithFormEdit.setEventListeners();
-
-//   const validation = new FormValidator({
-//     ...config.configValidation,
-//     formSelector: config.form,
-//   });
-//   validation.enableValidation();
-// validation.resetValidation();

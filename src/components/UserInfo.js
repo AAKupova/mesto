@@ -1,3 +1,5 @@
+/** @class UserInfo - создание экземпляр для редактирование данных на страницу. */
+
 export default class UserInfo {
   #name;
 
@@ -5,15 +7,27 @@ export default class UserInfo {
 
   #valueEdit;
 
+  /** @constructor */
+  /**
+   * Параметры:
+   * @param {HTMLElement} name dom элемент - имя профиля.
+   * @param {HTMLElement} job dom элемент - описание профиля.
+   */
   constructor(name, job) {
     this.#name = name;
     this.#job = job;
   }
 
+  /**
+   * Метод возрощает новые данные профиля.
+   *
+   * @return {Object} - данные профиля.
+   */
   getUserInfo() {
     return this.#valueEdit;
   }
 
+  /** Метод вставляет данные на страницу. */
   setUserInfo(valueEdit) {
     this.#valueEdit = valueEdit;
     this.#name.textContent = this.#valueEdit.name.trim();
