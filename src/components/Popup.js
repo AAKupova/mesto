@@ -17,14 +17,13 @@ export default class Popup {
   /** Метод открывающий попап. */
   open() {
     this.#popup.classList.remove('popup_hidden');
-
-    this.setEventListeners();
+    document.addEventListener('keydown', this.#handleEscClose);
   }
 
   /** Метод закрытия попап. */
   close() {
     this.#popup.classList.add('popup_hidden');
-    this.#removeEventListeners();
+    document.removeEventListener('keydown', this.#handleEscClose);
   }
 
   /** Метод проверки таргета.
@@ -46,15 +45,8 @@ export default class Popup {
     }
   };
 
-  /** Метод удаление прослушивателями событий. */
-  #removeEventListeners() {
-    document.removeEventListener('keydown', this.#handleEscClose);
-    this.#popup.removeEventListener('click', this.handlerHide);
-  }
-
   /** Метод подписки на событий. */
   setEventListeners() {
     this.#popup.addEventListener('click', this.handlerHide);
-    document.addEventListener('keydown', this.#handleEscClose);
   }
 }

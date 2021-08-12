@@ -7,6 +7,8 @@ export default class PopupWithImage extends Popup {
 
   #text;
 
+  #popup;
+
   /** @constructor */
   /**
    * Параметры:
@@ -16,8 +18,11 @@ export default class PopupWithImage extends Popup {
    */
   constructor(popupSelector, previewImage, previewCaption) {
     super(popupSelector);
-    this.#img = document.querySelector(previewImage);
-    this.#text = document.querySelector(previewCaption);
+    this.#popup = document.querySelector(popupSelector);
+    this.#img = this.#popup.querySelector(previewImage);
+    this.#text = this.#popup.querySelector(previewCaption);
+
+    this.setEventListeners();
   }
 
   /** Метод наследует от родителя (метод open) и расширяет его,
