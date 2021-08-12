@@ -1,17 +1,13 @@
-import { initialCards } from './initial-cards.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/popupWithForm.js';
-import FormValidator from '../components/FormValidator.js';
-import UserInfo from '../components/UserInfo.js';
-import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
-import Card from '../components/Card.js';
-
+import { initialCards } from './data';
+import PopupWithImage from './components/PopupWithImage';
+import PopupWithForm from './components/PopupWithForm';
+import FormValidator from './components/FormValidator';
+import UserInfo from './components/UserInfo';
+import Section from './components/Section';
+import Card from './components/Card';
 import {
   buttonPopupEdit,
   buttonPopupAdd,
-  selectorPopupAdd,
-  selectorPopupEdit,
   profileName,
   profileText,
   cardTemplate,
@@ -24,7 +20,10 @@ import {
   popupAdd,
   formEdit,
   popupEdit,
-} from '../utils/constants.js';
+} from './utils/constants';
+
+import './pages/index.css';
+import Popup from './components/Popup';
 
 const renderCard = (item) => {
   const card = new Card(item, cardTemplate, {
@@ -33,35 +32,26 @@ const renderCard = (item) => {
       openPopupPreview.open(e);
     },
   });
+
   return card.newCard();
 };
 
-const renderDom = (item) => {
+const renderer = (item) => {
+  // eslint-disable-next-line no-use-before-define
   section.addItem(renderCard(item));
 };
 
 const section = new Section(
   {
     initialCards,
-    renderer: (item) => {
-      renderDom(item);
-    },
+    renderer,
   },
   containerCards
 );
-section.rendererGeneral();
 
-const handlerSubmitFormAddCard = (data) => {
-  renderDom(data);
-};
+section.render();
 
 const userInfo = new UserInfo(profileName, profileText);
-
-const handlerOpenPopupAddEdit = () => {
-  const valueEdit = userInfo.getUserInfo();
-  nameInput.value = profileName.textContent.trim() || valueEdit.name;
-  jobInput.value = profileText.textContent.trim() || valueEdit.job;
-};
 
 const handlerSubmitFormAddEdit = (valueEdit) => {
   userInfo.setUserInfo(valueEdit);
@@ -77,40 +67,36 @@ const validationEdit = new FormValidator({
   formSelector: formEdit,
 });
 
-// validationEdit.enableValidation();
-// validationAdd.enableValidation();
+const addPopupForm = new PopupWithForm(formAdd, popupAdd, {
+  onSubmit: renderer,
+});
 
-const popupWithFormAdd = () => {
-  const popupWithForm = new PopupWithForm(formAdd, popupAdd, {
-    onSubmit: handlerSubmitFormAddCard,
-  });
-  popupWithForm.setEventListeners();
-  validationAdd.enableValidation();
-};
+addPopupForm.setEventListeners();
+validationAdd.enableValidation();
 
-const popupWithFormEdit = () => {
-  const popupWithForm = new PopupWithForm(formEdit, popupEdit, {
-    onSubmit: handlerSubmitFormAddEdit,
-  });
+const editPopupForm = new PopupWithForm(formEdit, popupEdit, {
+  onSubmit: handlerSubmitFormAddEdit,
+});
 
-  popupWithForm.setEventListeners();
-  validationEdit.enableValidation();
-};
+editPopupForm.setEventListeners();
+validationEdit.enableValidation();
 
-popupWithFormEdit();
-popupWithFormAdd();
+const editPopup = new Popup(popupEdit);
 
 const openPopupEdit = () => {
-  const classPopupu = new Popup(selectorPopupEdit);
-  classPopupu.open();
-  handlerOpenPopupAddEdit();
   validationEdit.resetValidation();
+
+  const valueEdit = userInfo.getUserInfo();
+  nameInput.value = profileName.textContent.trim() || valueEdit.name;
+  jobInput.value = profileText.textContent.trim() || valueEdit.job;
+
+  editPopup.open();
 };
 
+const addPopup = new Popup(popupAdd);
+
 const openPopupAdd = () => {
-  const classPopupu = new Popup(selectorPopupAdd);
-  classPopupu.open();
-  validationAdd.resetForm();
+  addPopup.open();
   validationAdd.resetValidation();
 };
 
