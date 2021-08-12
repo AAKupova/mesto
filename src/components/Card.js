@@ -1,7 +1,3 @@
-// import { initialCards } from './initial-cards.js';
-// import PopupWithImage from './PopupWithImage.js';
-// import Section from './Section.js';
-
 /**
  * @typedef TClassNames
  * @type {object}
@@ -28,6 +24,14 @@ export default class Card {
   #data;
 
   #image;
+
+  #card;
+
+  #title;
+
+  #like;
+
+  #remove;
 
   /** @type {TClassNames} */
   #classNames = {
@@ -76,35 +80,30 @@ export default class Card {
    */
   #createCard() {
     const { link, name } = this.#data;
-    const card = this.#cloneTemplate();
-    const title = card.querySelector(this.#selectors.title);
-    const like = card.querySelector(this.#selectors.like);
-    const remove = card.querySelector(this.#selectors.delete);
+    this.#card = this.#cloneTemplate();
+    this.#title = this.#card.querySelector(this.#selectors.title);
+    this.#like = this.#card.querySelector(this.#selectors.like);
+    this.#remove = this.#card.querySelector(this.#selectors.delete);
 
-    this.#image = card.querySelector(this.#selectors.image);
+    this.#image = this.#card.querySelector(this.#selectors.image);
 
     this.#image.src = link;
     this.#image.alt = name;
-    title.textContent = name;
+    this.#title.textContent = name;
 
-    this.#addEventsListener(like, remove);
-    this.#openPopup(card);
+    this.#addEventsListener();
+    this.#setEventListener(this.#card);
 
-    return card;
+    return this.#card;
   }
 
-  /**
-   * Метод добавляет прослушиватели событий для карточки.
-   *
-   * @param {HTMLElement} like - элемент карточки - иконка лайка.
-   * @param {HTMLElement} remove - элемент карточки - иконка удаления.
-   */
-  #addEventsListener(like, remove) {
-    like.addEventListener('click', this.#handlerClickLike.bind(this));
-    remove.addEventListener('click', this.#handlerDeleteCard.bind(this));
+  /** Метод добавляет прослушиватели событий для карточки. */
+  #addEventsListener() {
+    this.#like.addEventListener('click', this.#handlerClickLike.bind(this));
+    this.#remove.addEventListener('click', this.#handlerDeleteCard.bind(this));
   }
 
-  #openPopup(card) {
+  #setEventListener(card) {
     card.addEventListener('click', (e) => {
       if (e.target === this.#image) {
         this.handleCardClick(e);

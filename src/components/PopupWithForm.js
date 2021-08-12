@@ -59,7 +59,7 @@ export default class PopupWithForm extends Popup {
   /** Метод наследует родительский (метод setEventListeners) и расширяет его,
    * подпиской на событие submit.
    * */
-  setEventListeners() {
+  submitEventListeners() {
     super.setEventListeners();
     this.form.addEventListener('submit', (e) => {
       this.#handlerSubmit(e);
