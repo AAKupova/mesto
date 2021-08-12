@@ -89,7 +89,6 @@ const addPopupForm = new PopupWithForm(formAdd, popupAdd, {
   onSubmit: renderer,
 });
 
-addPopupForm.submitEventListeners();
 validationAdd.enableValidation();
 
 /** Функция сабмита формы редактирование профиля. */
@@ -102,7 +101,6 @@ const editPopupForm = new PopupWithForm(formEdit, popupEdit, {
   onSubmit: handlerSubmitFormAddEdit,
 });
 
-editPopupForm.submitEventListeners();
 validationEdit.enableValidation();
 
 /** Функция открывает попап редактирование профиля и вставляет данные в форму. */

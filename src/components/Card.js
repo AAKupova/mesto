@@ -92,7 +92,6 @@ export default class Card {
     this.#title.textContent = name;
 
     this.#addEventsListener();
-    this.#setEventListener(this.#card);
 
     return this.#card;
   }
@@ -101,14 +100,7 @@ export default class Card {
   #addEventsListener() {
     this.#like.addEventListener('click', this.#handlerClickLike.bind(this));
     this.#remove.addEventListener('click', this.#handlerDeleteCard.bind(this));
-  }
-
-  #setEventListener(card) {
-    card.addEventListener('click', (e) => {
-      if (e.target === this.#image) {
-        this.handleCardClick(e);
-      }
-    });
+    this.#image.addEventListener('click', (e) => this.handleCardClick(e));
   }
 
   /**
@@ -120,13 +112,9 @@ export default class Card {
     e.target.classList.toggle(this.#classNames.likeActive);
   }
 
-  /**
-   * Метод удаление карточки.
-   *
-   * @param {Event} e - элемент события.
-   */
-  #handlerDeleteCard(e) {
-    e.target.closest(this.#selectors.card).remove();
+  /** Метод удаление карточки. */
+  #handlerDeleteCard() {
+    this.#card.remove();
   }
 
   /**

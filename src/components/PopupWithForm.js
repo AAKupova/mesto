@@ -24,6 +24,8 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this.form = document.querySelector(formSelector);
     this.#onSubmit = onSubmit;
+
+    this.setEventListeners();
   }
 
   /** Метод наследует от родителя (метод close) и расширяет его,
@@ -58,8 +60,8 @@ export default class PopupWithForm extends Popup {
 
   /** Метод наследует родительский (метод setEventListeners) и расширяет его,
    * подпиской на событие submit.
-   * */
-  submitEventListeners() {
+   */
+  setEventListeners() {
     super.setEventListeners();
     this.form.addEventListener('submit', (e) => {
       this.#handlerSubmit(e);
