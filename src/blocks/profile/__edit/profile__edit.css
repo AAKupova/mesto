@@ -8,6 +8,10 @@
   align-self: center;
 }
 
+.profile__hover {
+  display: none;
+}
+
 .profile__edit:hover {
   opacity: 0.6;
   cursor: pointer;
