@@ -44,12 +44,11 @@
 
     <div class="popup popup_hidden popup_js_edit">
       <div class="popup__container">
-        <button
-          type="button"
-          class="popup__close popup__close_js_edit"
-        ></button>
+        <button type="button" class="popup__close"></button>
         <form name="editProfile" class="form form_js_edit" novalidate>
-          <h2 class="form__title">Редактировать профиль</h2>
+          <h2 class="form__title form__title_margin_yes">
+            Редактировать профиль
+          </h2>
 
           <label class="form__field">
             <input
@@ -91,9 +90,9 @@
 
     <div class="popup popup_hidden popup_js_add">
       <div class="popup__container">
-        <button type="button" class="popup__close popup__close_js_add"></button>
+        <button type="button" class="popup__close"></button>
         <form name="addCard" class="form form_js_add" novalidate>
-          <h2 class="form__title">Новое место</h2>
+          <h2 class="form__title form__title_margin_yes">Новое место</h2>
           <label class="form__field">
             <input
               minlength="2"
@@ -130,10 +129,7 @@
 
     <div class="popup popup_hidden popup_opacity_dark popup_js_preview">
       <div class="popup__container">
-        <button
-          type="button"
-          class="popup__close popup__close_js_preview"
-        ></button>
+        <button type="button" class="popup__close"></button>
         <div class="preview">
           <div class="preview__body">
             <img class="preview__image" alt="Картинка" src="/" />
@@ -143,13 +139,50 @@
       </div>
     </div>
 
+    <div class="popup popup_hidden popup_js_confirm">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form name="addCard" class="form form_js_add" novalidate>
+          <h2 class="form__title">Вы уверены?</h2>
+          <button type="submit" class="form__submit-btn">Да</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_hidden popup_js_edit-photo">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form name="addCard" class="form form_edit-photo" novalidate>
+          <h2 class="form__title form__title_margin_yes">Обновить аватар</h2>
+          <label class="form__field">
+            <input
+              pattern="https://.*"
+              id="link-input"
+              class="
+                form__input form__input_type_link form__input_placeholder_gray
+              "
+              type="url"
+              name="link"
+              placeholder="Ссылка на фото"
+              required
+            />
+            <span class="form__input-error link-input-error"></span>
+          </label>
+          <button type="submit" class="form__submit-btn">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card">
       <li class="card">
         <button type="button" class="card__delete"></button>
         <img class="card__image" />
         <div class="card__footer">
           <h2 class="card__title"></h2>
-          <button type="button" class="card__like"></button>
+          <div class="card__container-like">
+            <button type="button" class="card__like"></button>
+            <span class="card__like-counter">5</span>
+          </div>
         </div>
       </li>
     </template>

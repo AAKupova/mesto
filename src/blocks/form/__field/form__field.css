@@ -1,4 +1,7 @@
 .form__field {
   display: inline-block;
+}
+
+.form__field:first-of-type {
   margin-bottom: 22px;
 }
