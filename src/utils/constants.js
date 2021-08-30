@@ -19,13 +19,19 @@ export const formData = {
   errorClass: 'form__input-error_active',
 };
 
+/** @type {HTMLElement} кнопка редоктирование профиля. */
 export const buttonPopupEdit = document.querySelector('.profile__edit');
+/** @type {HTMLElement} кнопка добавления карточки. */
 export const buttonPopupAdd = document.querySelector('.profile__add-btn');
+/** @type {HTMLElement} кнопка обновление фото. */
+export const buttonUpdatePhoto = document.querySelector('.profile__left');
 
-/** @type {HTMLElement} dom элемент имеи профиля */
+/** @type {HTMLElement} dom элемент имеи профиля. */
 export const profileName = document.querySelector('.profile__title');
-/** @type {HTMLElement} dom элемент описания профиля */
+/** @type {HTMLElement} dom элемент описания профиля. */
 export const profileText = document.querySelector('.profile__text');
+/** @type {HTMLElement} dom элемент фото профиля. */
+export const profilePhoto = document.querySelector('.profile__avatar');
 
 /** @type {HTMLElement} контайнер карточек */
 export const containerCards = document.querySelector('.cards__list');
@@ -41,12 +47,19 @@ export const jobInput = document.querySelector('.form__input_type_description');
 export const popupAdd = '.popup_js_add';
 /** @type {String} селектор попапа превью */
 export const popupPreview = '.popup_js_preview';
+/** @type {String} селектор попапа редактирования профиля */
+export const popupEdit = '.popup_js_edit';
+/** @type {String} селектор попапа подтверждения на удаление карточки */
+export const popupConfirm = '.popup_js_confirm';
+/** @type {String} селектор попапа обновление фото */
+export const popupUpdatePhoto = '.popup_js_edit-photo';
+
 /** @type {String} селектор формы добавления карточки */
 export const formAdd = '.form_js_add';
 /** @type {String} селектор формы редактирования профиля */
 export const formEdit = '.form_js_edit';
-/** @type {String} селектор попапа редактирования профиля */
-export const popupEdit = '.popup_js_edit';
+/** @type {String} селектор формы  обновление фото */
+export const formUpdatePhoto = '.form_edit-photo';
 
 /** @type {String} селектор попапа иконки закрытия */
 export const popupСlose = '.popup__close';

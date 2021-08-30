@@ -4,13 +4,23 @@ import { formInput } from '../utils/constants';
 /** @class PopupWithForm - создание экземпляра попапа с формой. */
 /** @extends Popup */
 export default class PopupWithForm extends Popup {
+  /** @type {HTMLElement}  form элемент формы. */
   form;
 
+  /** @type {CallableFunction} onSubmit - функция отправки данных. */
   #onSubmit;
 
+  /** @type {[HTMLElement]} inputList - элементы полей формы. */
   #inputList;
 
+  /** @type {Object} formValues. */
   #formValues;
+
+  /** @type {HTMLElement} button - кнопка сабмит. */
+  #button;
+
+  /** @type {String} initialText - первоначальный текст кнопки. */
+  #initialText;
 
   /** @constructor */
   /**
@@ -22,7 +32,9 @@ export default class PopupWithForm extends Popup {
    */
   constructor(formSelector, popupSelector, { onSubmit }) {
     super(popupSelector);
-    this.form = document.querySelector(formSelector);
+    this.form = this.popup.querySelector(formSelector);
+    this.#button = this.form.querySelector('.form__submit-btn');
+    this.#initialText = this.#button.textContent;
     this.#onSubmit = onSubmit;
 
     this.setEventListeners();
@@ -44,17 +56,14 @@ export default class PopupWithForm extends Popup {
   }
 
   /** Метод собирающий данные всех полей формы.
-   *  formInput - селектор  полей формы.
    * @return {Object} - возрощает объект со значениями полей формы.
    */
   #getInputValues() {
     this.#inputList = this.form.querySelectorAll(formInput);
     this.#formValues = {};
-
     this.#inputList.forEach((input) => {
       this.#formValues[input.name] = input.value;
     });
-
     return this.#formValues;
   }
 
@@ -66,5 +75,16 @@ export default class PopupWithForm extends Popup {
     this.form.addEventListener('submit', (e) => {
       this.#handlerSubmit(e);
     });
+  }
+
+  /** Метод показывает индификатор загрузки.
+   * @param {Boolean} - isLoading.
+   */
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this.#button.textContent = 'Сохранить...';
+    } else {
+      this.#button.textContent = this.#initialText;
+    }
   }
 }
