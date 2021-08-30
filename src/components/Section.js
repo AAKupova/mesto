@@ -1,31 +1,38 @@
 /** @class Section - создание экземпляр для вставки контента на страницу. */
 export default class Section {
-  #items;
+  /** @type {[Object]}  item. */
+  #item;
 
-  #renderer;
-
+  /** @type {HTMLElement}  container - для вставки карточки. */
   #container;
+
+  /** @type {CallableFunction} oneRender - функцию отрисовки данных. */
+  #oneRender;
 
   /** @constructor */
   /**
    * Параметры:
-   * @callback renderer
+   * @callback oneRender
    * @param {initialCards[]}  - массив объектов с данными.
-   * @param {renderer}  - вызывает функцию отрисовки данных.
+   * @param {oneRender}  - вызывает функцию отрисовки данных.
    * @param {HTMLElement} container - dom элемент контейнера.
    */
-  constructor({ initialCards, renderer }, container) {
-    this.#items = initialCards;
-    this.#renderer = renderer;
+  constructor({ result, oneRender }, container) {
+    this.#item = result;
+    this.#oneRender = oneRender;
     this.#container = container;
   }
 
   /** Метод отрисовки данных. */
   render() {
-    this.#items.forEach((item) => this.#renderer(item));
+    this.#item.forEach((item) => {
+      this.#oneRender(item);
+    });
   }
 
-  /** Метод вставки данных на страницу. */
+  /** Метод вставки данных на страницу.
+   * @param {HTMLElement} domElement - dom элемент карточки.
+   */
   addItem(domElement) {
     this.#container.prepend(domElement);
   }

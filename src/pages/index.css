@@ -19,9 +19,12 @@
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 
 @import url(../blocks/cards/__list/cards__list.css);
+@import url(../blocks/error/__404/error__404.css);
+@import url(../blocks/error/_hidden/error_hidden.css);
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__delete/_hidden/card__delete_hidden.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__footer/card__footer.css);
 @import url(../blocks/card/__title/card__title.css);

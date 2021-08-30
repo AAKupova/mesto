@@ -3,8 +3,10 @@ import Popup from './Popup';
 /** @class PopupWithImage - создание экземпляр попапа с превью. */
 /** @extends Popup */
 export default class PopupWithImage extends Popup {
+  /** @type {HTMLElement}  img контейнер для вставки картинки. */
   #img;
 
+  /** @type {HTMLElement}  text контейнер для вставки текста. */
   #text;
 
   /** @constructor */
@@ -24,12 +26,12 @@ export default class PopupWithImage extends Popup {
 
   /** Метод наследует от родителя (метод open) и расширяет его,
    * добовляет данные в попап (картинку, текст).
+   * @param {Object} data - данные карточки.
    */
-  open(e) {
+  open(data) {
     super.open();
-
-    this.#img.src = e.target.src;
-    this.#img.alt = e.target.alt;
-    this.#text.textContent = e.target.alt;
+    this.#img.src = data.link;
+    this.#img.alt = data.name;
+    this.#text.textContent = data.name;
   }
 }

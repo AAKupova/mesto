@@ -2,6 +2,7 @@ import { popupСlose } from '../utils/constants';
 
 /** @class Popup - создание экземпляра попапа. */
 export default class Popup {
+  /** @type {HTMLElement}  popup. */
   popup;
 
   /** @constructor */

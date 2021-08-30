@@ -1,3 +1,13 @@
+@keyframes rotate {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(3);
+  }
+}
+
 .profile__left {
   margin-bottom: 26px;
 }
@@ -16,20 +26,36 @@
 .profile__left .profile__avatar {
   height: 120px;
 }
-.profile__left:before {
+.profile__left:after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  background: rgba(0, 0, 0, 0.8) url('../../../images/Vector.svg') no-repeat 50%
-    50%;
+  background: url('../../../images/Vector.svg') no-repeat 50% 50%;
   width: 120px;
   height: 150px;
   margin: -75px 0 0 -60px;
   opacity: 0;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
 }
 .profile__left:hover:before {
+  opacity: 1;
+  transform: scale(3);
+  animation: rotate 0.5s;
+}
+
+.profile__left:before {
+  background: rgba(0, 0, 0, 0.8);
+  content: '';
+  height: 41px;
+  left: 83%;
+  border-radius: 50%;
+  margin: -75px 0 0 -60px;
+  opacity: 0;
+  position: absolute;
+  top: 93%;
+  width: 41px;
+}
+
+.profile__left:hover:after {
   opacity: 1;
 }
