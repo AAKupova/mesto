@@ -18,8 +18,8 @@ export default class Api {
         return Promise.reject(res.status);
       })
       .catch((err) => {
-        document.querySelector('.error__404').classList.remove('error_hidden');
         console.error(`Ошибка: ${err}`);
+        document.querySelector('.error__404').classList.toggle('error_hidden');
       });
   }
 

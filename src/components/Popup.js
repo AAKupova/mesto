@@ -17,7 +17,7 @@ export default class Popup {
 
   /** Метод открывающий попап. */
   open() {
-    this.popup.classList.remove('popup_hidden');
+    this.popup.classList.toggle('popup_hidden');
     document.addEventListener('keydown', this.#handleEscClose.bind(this));
   }
 
