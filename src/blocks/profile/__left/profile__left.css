@@ -10,6 +10,9 @@
 
 .profile__left {
   margin-bottom: 26px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
 }
 
 @media screen and (min-width: 625px) {
@@ -18,14 +21,6 @@
   }
 }
 
-.profile__left {
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-}
-.profile__left .profile__avatar {
-  height: 120px;
-}
 .profile__left:after {
   content: '';
   position: absolute;
