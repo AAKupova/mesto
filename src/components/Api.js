@@ -19,7 +19,9 @@ export default class Api {
       })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
-        document.querySelector('.error__404').classList.toggle('error_hidden');
+        document
+          .querySelector('.error__404')
+          .classList.remove('error__404_hidden');
       });
   }
 
