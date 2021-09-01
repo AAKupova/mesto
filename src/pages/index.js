@@ -7,6 +7,8 @@ import Section from '../components/Section';
 import Card from '../components/Card';
 import Api from '../components/Api';
 import {
+  errorElement,
+  mainElement,
   buttonPopupEdit,
   buttonPopupAdd,
   buttonUpdatePhoto,
@@ -91,20 +93,34 @@ const renderUserInfo = (valueEdit) => {
  * @param {Object} valueEdit - объект со значениями полей формы.
  */
 const handlerSubmitFormEdit = (valueEdit) => {
+  editPopupForm.renderLoading(true);
   api
     .rewriteUserInfo(valueEdit)
-    .finally(() => editPopupForm.renderLoading(false))
-    .then((res) => renderUserInfo(res));
+    .then((res) => renderUserInfo(res))
+    .catch((err) => console.error(`Ошибка: ${err}`))
+    .finally(() => editPopupForm.renderLoading(false));
+  editPopupForm.close();
 };
 
 /** Объявляем класс создание попапа потверждения на удаления. */
 const popupWithConfirm = new PopupWithConfirm(popupConfirm, {
-  api: (id) =>
-    api.deleteCard(id).then((res) => {
-      console.log(res);
-      popupWithConfirm.delete();
-    }),
+  // eslint-disable-next-line no-use-before-define
+  api: (id) => deleteCard(id),
 });
+
+/**
+ * @function deleteCard - сабмита удаление карточки.
+ * @param {Number} id - карточки которую нужно удалить.
+ */
+const deleteCard = (id) => {
+  popupWithConfirm.renderLoading(true);
+  api
+    .deleteCard(id)
+    .then(() => popupWithConfirm.delete())
+    .catch((err) => console.error(`Ошибка: ${err}`))
+    .finally(() => popupWithConfirm.renderLoading(false));
+  popupWithConfirm.close();
+};
 
 /** Объявляем класс PopupWithImage - создает попап с формой. */
 const openPopupPreview = new PopupWithImage(
@@ -114,12 +130,12 @@ const openPopupPreview = new PopupWithImage(
 );
 
 /**
- * @function renderCard - создает экземпляр класса.
+ * @function createCard - создает экземпляр класса.
  * @param {Object} item - объект с данными карточки.
  * @return {HTMLElement} - возрощает готовую карточку.
  */
-const renderCard = (item) => {
-  const card = new Card(item, cardTemplate, {
+const createCard = (item, dataUser) => {
+  const card = new Card(item, dataUser, cardTemplate, {
     handleCardClick: (e) => {
       e.preventDefault();
       openPopupPreview.open(item);
@@ -135,50 +151,60 @@ const renderCard = (item) => {
 };
 
 /**
- * @function section - вставляет карточки на страницу.
- * @param {[Object]} result - массив объект с данными.
+ * @function renderCard - вставляет карточки на страницу.
+ * @param {[Object]} item - массив объектов с данными.
  */
-const section = (result) => {
-  const sectionClass = new Section(
-    {
-      result,
-      oneRender: (item) => {
-        sectionClass.addItem(renderCard(item));
-      },
-    },
-    containerCards
-  );
+// eslint-disable-next-line no-use-before-define
+const renderCard = (item, dataUser) =>
+  sectionClass.addItem(createCard(item, dataUser));
 
-  sectionClass.render();
+/** Объявляем класс Section для вставки данных на страницу. */
+const sectionClass = new Section(containerCards, { oneRender: renderCard });
 
-  return sectionClass;
+/**
+ * @function errorNotFound - вставляет на страницу информацию о ошибки 404.
+ * @param {Boolean} isError
+ */
+const errorNotFound = (isError) => {
+  if (isError) {
+    errorElement.classList.remove('error__404_hidden');
+    mainElement.classList.add('main_hidden');
+  } else {
+    errorElement.classList.add('error__404_hidden');
+    mainElement.classList.remove('main_hidden');
+  }
 };
 
 /** Получаем данные с сервера. */
-api.getUser().then((dataUser) => {
-  userInfo.getUserInfo(userInfo.setUserInfo(dataUser));
-  api.getInitialCards().then((result) => {
-    section(result);
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then((data) => {
+    errorNotFound(false);
+    userInfo.getUserInfo(userInfo.setUserInfo(data[0]));
+    sectionClass.render(data[1], data[0]);
+  })
+  .catch((err) => {
+    console.error(`Ошибка: ${err}`);
+    errorNotFound(true);
   });
-});
 
 /** Объявляем класс PopupWithForm для создания и обработки формы добавления карточки. */
 const addPopupForm = new PopupWithForm(formAdd, popupAdd, {
   // eslint-disable-next-line no-use-before-define
-  onSubmit: (dataCard) => createCard(dataCard),
+  onSubmit: (dataCard) => addCard(dataCard),
 });
 
 /**
  * @function createCard - сабмит формы для для добавление карточки.
  * @param {Object} dataCard - объект со значениями полей формы.
  */
-const createCard = (dataCard) => {
+const addCard = (dataCard) => {
+  addPopupForm.renderLoading(true);
   api
     .createCard(dataCard)
-    .then((result) => {
-      section([result]);
-    })
+    .then((result) => sectionClass.render([result], result.owner))
+    .catch((err) => console.error(`Ошибка: ${err}`))
     .finally(() => addPopupForm.renderLoading(false));
+  addPopupForm.close();
 };
 
 /** Объявляем класс updatePhotoPopupForm для обновление фото. */
@@ -196,7 +222,13 @@ const updatePhotoPopupForm = new PopupWithForm(
  * @param {Object} valueEdit - объект со значениями полей формы.
  */
 const updatePhoto = (valueEdit) => {
-  api.UpdatePhoto(valueEdit).then((res) => renderUserInfo(res));
+  updatePhotoPopupForm.renderLoading(true);
+  api
+    .updatePhoto(valueEdit)
+    .then((res) => renderUserInfo(res))
+    .catch((err) => console.error(`Ошибка: ${err}`))
+    .finally(() => updatePhotoPopupForm.renderLoading(false));
+  updatePhotoPopupForm.close();
 };
 
 /**

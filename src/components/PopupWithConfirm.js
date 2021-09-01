@@ -9,6 +9,12 @@ export default class PopupWithConfirm extends Popup {
   /** @type {CallableFunction} api - функция отправки данных. */
   #api;
 
+  /** @type {HTMLElement} button - кнопка сабмит. */
+  #button;
+
+  /** @type {String} initialText - первоначальный текст кнопки. */
+  #initialText;
+
   /** @constructor */
   /**
    * Параметры:
@@ -20,6 +26,8 @@ export default class PopupWithConfirm extends Popup {
     super(popupSelector);
     this.#api = api;
     this.#form = this.popup.querySelector('form');
+    this.#button = this.#form.querySelector('.form__submit-btn');
+    this.#initialText = this.#button.textContent;
     this.#addEventListener();
   }
 
@@ -45,12 +53,22 @@ export default class PopupWithConfirm extends Popup {
   /** Метод передает данные на сервер для удаление картчоки. */
   #deleteCard(e) {
     e.preventDefault();
-    this.#api(this.id, this.element);
-    this.close();
+    this.#api(this.id);
   }
 
   /** Метод удаляет карточку из Dom. */
   delete() {
     this.element.remove();
+  }
+
+  /** Метод показывает индификатор загрузки.
+   * @param {Boolean} - isLoading.
+   */
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this.#button.textContent = 'Удаление...';
+    } else {
+      this.#button.textContent = this.#initialText;
+    }
   }
 }

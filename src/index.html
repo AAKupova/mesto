@@ -13,7 +13,15 @@
         <div class="logo"></div>
       </header>
 
-      <main class="main">
+      <div class="error">
+        <img
+          src="<%=require('./images/404.png')%>"
+          class="error__404 error__404_hidden"
+          alt="ошибка 404"
+        />
+      </div>
+
+      <main class="main main_hidden">
         <section class="profile">
           <div class="profile__left">
             <img class="profile__avatar" alt="Фото профеля" />
@@ -29,18 +37,11 @@
         </section>
         <section class="cards">
           <ul class="cards__list"></ul>
-          <div class="error">
-            <img
-              src="<%=require('./images/404.png')%>"
-              class="error__404 error__404_hidden"
-              alt="ошибка 404"
-            />
-          </div>
         </section>
       </main>
 
       <footer class="footer">
-        <p class="footer__text">&copy; 2020 Mesto Russia</p>
+        <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
     </div>
 
