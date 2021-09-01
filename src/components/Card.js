@@ -145,13 +145,13 @@ export default class Card {
     // eslint-disable-next-line
     const id = this.#data._id;
     if (this.#like.classList.contains(this.#classNames.likeActive)) {
-      this.disLike(id).then((res) => {
-        this.#disLike(res.likes.length);
-      });
+      this.disLike(id)
+        .then((res) => this.#disLike(res.likes.length))
+        .catch((err) => console.error(`Ошибка: ${err}`));
     } else {
-      this.like(id).then((res) => {
-        this.#addLike(res.likes.length);
-      });
+      this.like(id)
+        .then((res) => this.#addLike(res.likes.length))
+        .catch((err) => console.error(`Ошибка: ${err}`));
     }
   }
 

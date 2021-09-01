@@ -10,7 +10,7 @@ export default class Api {
     return fetch(`${baseUrl}cards`, {
       method: 'GET',
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   getUser() {
@@ -18,7 +18,7 @@ export default class Api {
     return fetch(`${baseUrl}users/me`, {
       method: 'GET',
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   createCard(dataCard) {
@@ -27,7 +27,7 @@ export default class Api {
       method: 'POST',
       body: JSON.stringify(dataCard),
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   rewriteUserInfo(valueEdit) {
@@ -39,7 +39,7 @@ export default class Api {
         name: valueEdit.name,
         about: valueEdit.about,
       }),
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   disLike(id) {
@@ -47,7 +47,7 @@ export default class Api {
     return fetch(`${baseUrl}cards/likes/${id}`, {
       method: 'DELETE',
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   like(id) {
@@ -55,7 +55,7 @@ export default class Api {
     return fetch(`${baseUrl}cards/likes/${id}`, {
       method: 'PUT',
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   deleteCard(id) {
@@ -63,7 +63,7 @@ export default class Api {
     return fetch(`${baseUrl}cards/${id}`, {
       method: 'DELETE',
       headers,
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   updatePhoto(photo) {
@@ -74,7 +74,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: photo.link,
       }),
-    }).then((res) => this.#getResponseData(res));
+    }).then(this.#getResponseData);
   }
 
   // eslint-disable-next-line
