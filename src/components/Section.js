@@ -1,8 +1,5 @@
 /** @class Section - создание экземпляр для вставки контента на страницу. */
 export default class Section {
-  /** @type {[Object]}  item. */
-  #item;
-
   /** @type {HTMLElement}  container - для вставки карточки. */
   #container;
 
@@ -17,16 +14,18 @@ export default class Section {
    * @param {oneRender}  - вызывает функцию отрисовки данных.
    * @param {HTMLElement} container - dom элемент контейнера.
    */
-  constructor({ result, oneRender }, container) {
-    this.#item = result;
+  constructor(container, { oneRender }) {
     this.#oneRender = oneRender;
     this.#container = container;
   }
 
-  /** Метод отрисовки данных. */
-  render() {
-    this.#item.forEach((item) => {
-      this.#oneRender(item);
+  /** Метод отрисовки данных.
+   * @param {[Object]} result - данные для создания элемента.
+   * @param { Object } dataUser - данные пользователя.
+   */
+  render(result, dataUser) {
+    result.forEach((item) => {
+      this.#oneRender(item, dataUser);
     });
   }
 

@@ -19,6 +19,11 @@ export const formData = {
   errorClass: 'form__input-error_active',
 };
 
+/** @type {HTMLElement} элемент отоброжения ошибки 404. */
+export const errorElement = document.querySelector('.error__404');
+/** @type {HTMLElement} контейнер основного контента страницы. */
+export const mainElement = document.querySelector('.main');
+
 /** @type {HTMLElement} кнопка редоктирование профиля. */
 export const buttonPopupEdit = document.querySelector('.profile__edit');
 /** @type {HTMLElement} кнопка добавления карточки. */

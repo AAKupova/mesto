@@ -25,6 +25,9 @@ export default class Card {
   /** @type {object}  data - данные для карточки. */
   #data;
 
+  /** @type {object}  dataUser - данные пользователя. */
+  #dataUser;
+
   /** @type {HTMLElement}  image - элемент для вставки картинки. */
   #image;
 
@@ -77,11 +80,13 @@ export default class Card {
    */
   constructor(
     data,
+    dataUser,
     template,
     { handleCardClick, handleCardDelete, like, disLike }
   ) {
     this.#template = template;
     this.#data = data;
+    this.#dataUser = dataUser;
     this.handleCardClick = handleCardClick;
     this.handleCardDelete = handleCardDelete;
     this.like = like;
@@ -127,7 +132,7 @@ export default class Card {
     const { likes } = this.#data;
     this.#data.likes.forEach((item) => {
       // eslint-disable-next-line
-      if (item._id !== 'a74fbad0e0fcfdc67af96c64') {
+      if (item._id !== this.#dataUser._id) {
         this.#disLike(likes.length);
       } else {
         this.#addLike(likes.length);
@@ -181,7 +186,7 @@ export default class Card {
   #addDeleteIcon() {
     const iconDelete = this.#card.querySelector(this.#selectors.iconDelete);
     // eslint-disable-next-line
-    if (this.#data.owner._id !== 'a74fbad0e0fcfdc67af96c64') {
+    if (this.#data.owner._id !== this.#dataUser._id) {
       iconDelete.classList.add(this.#classNames.iconDelete);
     } else {
       iconDelete.classList.remove(this.#classNames.iconDelete);

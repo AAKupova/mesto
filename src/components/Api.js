@@ -10,19 +10,7 @@ export default class Api {
     return fetch(`${baseUrl}cards`, {
       method: 'GET',
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-        document
-          .querySelector('.error__404')
-          .classList.remove('error__404_hidden');
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   getUser() {
@@ -30,16 +18,7 @@ export default class Api {
     return fetch(`${baseUrl}users/me`, {
       method: 'GET',
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   createCard(dataCard) {
@@ -48,16 +27,7 @@ export default class Api {
       method: 'POST',
       body: JSON.stringify(dataCard),
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   rewriteUserInfo(valueEdit) {
@@ -69,16 +39,7 @@ export default class Api {
         name: valueEdit.name,
         about: valueEdit.about,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   disLike(id) {
@@ -86,16 +47,7 @@ export default class Api {
     return fetch(`${baseUrl}cards/likes/${id}`, {
       method: 'DELETE',
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   like(id) {
@@ -103,16 +55,7 @@ export default class Api {
     return fetch(`${baseUrl}cards/likes/${id}`, {
       method: 'PUT',
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
   deleteCard(id) {
@@ -120,19 +63,10 @@ export default class Api {
     return fetch(`${baseUrl}cards/${id}`, {
       method: 'DELETE',
       headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.error(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
   }
 
-  UpdatePhoto(photo) {
+  updatePhoto(photo) {
     const { baseUrl, headers } = this.#options;
     return fetch(`${baseUrl}users/me/avatar `, {
       method: 'PATCH',
@@ -140,15 +74,14 @@ export default class Api {
       body: JSON.stringify({
         avatar: photo.link,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res.status);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
+    }).then((res) => this.#getResponseData(res));
+  }
+
+  // eslint-disable-next-line
+  #getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(new Error(`Ошибка: ${res.status}`));
+    }
+    return res.json();
   }
 }

@@ -52,7 +52,6 @@ export default class PopupWithForm extends Popup {
   #handlerSubmit(e) {
     e.preventDefault();
     this.#onSubmit(this.#getInputValues());
-    this.close();
   }
 
   /** Метод собирающий данные всех полей формы.
