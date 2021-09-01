@@ -154,8 +154,8 @@ const createCard = (item, dataUser) => {
  * @function renderCard - вставляет карточки на страницу.
  * @param {[Object]} item - массив объектов с данными.
  */
-// eslint-disable-next-line no-use-before-define
 const renderCard = (item, dataUser) =>
+  // eslint-disable-next-line no-use-before-define
   sectionClass.addItem(createCard(item, dataUser));
 
 /** Объявляем класс Section для вставки данных на страницу. */
