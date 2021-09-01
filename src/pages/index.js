@@ -96,10 +96,12 @@ const handlerSubmitFormEdit = (valueEdit) => {
   editPopupForm.renderLoading(true);
   api
     .rewriteUserInfo(valueEdit)
-    .then((res) => renderUserInfo(res))
+    .then((res) => {
+      renderUserInfo(res);
+      editPopupForm.close();
+    })
     .catch((err) => console.error(`Ошибка: ${err}`))
     .finally(() => editPopupForm.renderLoading(false));
-  editPopupForm.close();
 };
 
 /** Объявляем класс создание попапа потверждения на удаления. */
@@ -116,10 +118,12 @@ const deleteCard = (id) => {
   popupWithConfirm.renderLoading(true);
   api
     .deleteCard(id)
-    .then(() => popupWithConfirm.delete())
+    .then(() => {
+      popupWithConfirm.delete();
+      popupWithConfirm.close();
+    })
     .catch((err) => console.error(`Ошибка: ${err}`))
     .finally(() => popupWithConfirm.renderLoading(false));
-  popupWithConfirm.close();
 };
 
 /** Объявляем класс PopupWithImage - создает попап с формой. */
@@ -201,10 +205,12 @@ const addCard = (dataCard) => {
   addPopupForm.renderLoading(true);
   api
     .createCard(dataCard)
-    .then((result) => sectionClass.render([result], result.owner))
+    .then((result) => {
+      sectionClass.render([result], result.owner);
+      addPopupForm.close();
+    })
     .catch((err) => console.error(`Ошибка: ${err}`))
     .finally(() => addPopupForm.renderLoading(false));
-  addPopupForm.close();
 };
 
 /** Объявляем класс updatePhotoPopupForm для обновление фото. */
@@ -225,10 +231,12 @@ const updatePhoto = (valueEdit) => {
   updatePhotoPopupForm.renderLoading(true);
   api
     .updatePhoto(valueEdit)
-    .then((res) => renderUserInfo(res))
+    .then((res) => {
+      renderUserInfo(res);
+      updatePhotoPopupForm.close();
+    })
     .catch((err) => console.error(`Ошибка: ${err}`))
     .finally(() => updatePhotoPopupForm.renderLoading(false));
-  updatePhotoPopupForm.close();
 };
 
 /**
